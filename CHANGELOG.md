@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased
+[npm history](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x?activeTab=versions)
 
-Initial release.
+## v0.0.1 (2025-01-27)
+
+Initial prerelease version.
 
 ### Breaking Changes
 

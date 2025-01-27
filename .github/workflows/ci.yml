@@ -8,6 +8,10 @@ concurrency:
   group: '${{ github.workflow }} - ${{ github.head_ref || github.ref }}'
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
 
   check:
@@ -25,6 +29,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Setup LCOV
+        uses: hrishikesh-kadam/setup-lcov@v1
       - name: Setup Yarn
         run: corepack enable
 
@@ -32,10 +38,19 @@ jobs:
         run: yarn install
 
       - name: Type Check
-        run: yarn dist:build
+        run: yarn typecheck
 
       - name: Lint
         run: yarn lint
 
-      - name: Test
-        run: yarn test
+      - name: Test Coverage
+        run: yarn coverage
+
+      - name: Report Coverage
+        if: ${{ matrix.node-version == 22 && github.event_name == 'pull_request' }}
+        uses: zgosalvez/github-actions-report-lcov@v4
+        with:
+          coverage-files: coverage/lcov.info
+          minimum-coverage: 50
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          update-comment: true

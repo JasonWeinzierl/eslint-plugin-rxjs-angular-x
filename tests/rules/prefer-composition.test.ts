@@ -1,9 +1,9 @@
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../src/rules/prefer-composition");
-import { ruleTester } from "../utils";
+import { stripIndent } from 'common-tags';
+import { preferCompositionRule } from '../../src/rules/prefer-composition';
+import { fromFixture } from '../etc';
+import { ruleTester } from '../rule-tester';
 
-ruleTester({ types: true }).run("prefer-composition", rule, {
+ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
   valid: [
     {
       code: stripIndent`
@@ -116,7 +116,7 @@ ruleTester({ types: true }).run("prefer-composition", rule, {
           ngOnDestroy() {
           }
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -131,14 +131,14 @@ ruleTester({ types: true }).run("prefer-composition", rule, {
         export class NotUnsubscribedComponent implements OnInit, OnDestroy {
           value: string;
           private subscription = new Subscription();
-                  ~~~~~~~~~~~~ [notUnsubscribed]
+                  ~~~~~~~~~~~~ [notUnsubscribed { "name": "subscription" }]
           ngOnInit() {
             this.subscription.add(of("foo").subscribe(value => this.value = value));
           }
           ngOnDestroy() {
           }
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -158,7 +158,7 @@ ruleTester({ types: true }).run("prefer-composition", rule, {
             this.subscription.add(of("foo").subscribe(value => this.value = value));
           }
         }
-      `
+      `,
     ),
     fromFixture(
       stripIndent`
@@ -180,7 +180,7 @@ ruleTester({ types: true }).run("prefer-composition", rule, {
           ngOnDestroy() {
           }
         }
-      `
+      `,
     ),
   ],
 });

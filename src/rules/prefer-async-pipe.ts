@@ -1,55 +1,53 @@
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getParent, getTypeServices } from "eslint-etc";
-import { ruleCreator } from "../utils";
+import { TSESTree as es } from '@typescript-eslint/utils';
+import { getTypeServices } from '../etc';
+import { ruleCreator } from '../utils';
 
-const rule = ruleCreator({
+export const preferAsyncPipeRule = ruleCreator({
   defaultOptions: [],
   meta: {
     docs: {
       description:
-        "Forbids the calling of `subscribe` within Angular components.",
-      recommended: false,
+        'Disallow the calling of `subscribe` within Angular components.',
+      requiresTypeChecking: true,
     },
     fixable: undefined,
     hasSuggestions: false,
     messages: {
       forbidden:
-        "Calling `subscribe` in a component is forbidden; use an `async` pipe instead.",
+        'Calling `subscribe` in a component is forbidden; use an `async` pipe instead.',
     },
     schema: [],
-    type: "problem",
+    type: 'problem',
   },
-  name: "prefer-async-pipe",
+  name: 'prefer-async-pipe',
   create: (context) => {
     const { couldBeObservable } = getTypeServices(context);
     const componentMap = new WeakMap<es.Node, void>();
     return {
       [`CallExpression > MemberExpression[property.name="subscribe"]`]: (
-        memberExpression: es.MemberExpression
+        memberExpression: es.MemberExpression,
       ) => {
-        let parent = getParent(memberExpression);
+        let parent: es.Node | undefined = memberExpression.parent;
         while (parent) {
           if (
-            componentMap.has(parent) &&
-            couldBeObservable(memberExpression.object)
+            componentMap.has(parent)
+            && couldBeObservable(memberExpression.object)
           ) {
             context.report({
-              messageId: "forbidden",
+              messageId: 'forbidden',
               node: memberExpression.property,
             });
             return;
           }
-          parent = getParent(parent);
+          parent = parent.parent;
         }
       },
       [`ClassDeclaration > Decorator[expression.callee.name="Component"]`]: (
-        node: es.Node
+        node: es.Node,
       ) => {
-        const classDeclaration = getParent(node) as es.ClassDeclaration;
+        const classDeclaration = node.parent as es.ClassDeclaration;
         componentMap.set(classDeclaration);
       },
     };
   },
 });
-
-export = rule;

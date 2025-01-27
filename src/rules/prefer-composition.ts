@@ -1,56 +1,55 @@
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { stripIndent } from "common-tags";
+import { TSESTree as es } from '@typescript-eslint/utils';
+import { stripIndent } from 'common-tags';
 import {
-  getParent,
   getTypeServices,
   isAssignmentExpression,
   isCallExpression,
   isIdentifier,
   isMemberExpression,
   isVariableDeclarator,
-} from "eslint-etc";
-import { ruleCreator } from "../utils";
+} from '../etc';
+import { ruleCreator } from '../utils';
 
 const defaultOptions: readonly {
   checkDecorators?: string[];
 }[] = [];
 
-const rule = ruleCreator({
+export const preferCompositionRule = ruleCreator({
   defaultOptions,
   meta: {
     docs: {
       description:
-        "Forbids `subscribe` calls that are not composed within Angular components (and, optionally, within services, directives, and pipes).",
-      recommended: false,
+        'Disallow `subscribe` calls that are not composed within Angular components (and, optionally, within services, directives, and pipes).',
+      requiresTypeChecking: true,
     },
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      notComposed: "Subscription not composed.",
-      notDeclared: "Composed subscription `{{name}}` not a class property.",
-      notImplemented: "`ngOnDestroy` not implemented.",
-      notUnsubscribed: "Composed subscription not unsubscribed.",
+      notComposed: 'Subscription not composed.',
+      notDeclared: 'Composed subscription `{{name}}` not a class property.',
+      notImplemented: '`ngOnDestroy` not implemented.',
+      notUnsubscribed: 'Composed subscription `{{name}}` not unsubscribed.',
     },
     schema: [
       {
         properties: {
-          checkDecorators: { type: "array", items: { type: "string" } },
+          checkDecorators: { type: 'array', items: { type: 'string' }, description: 'An optional array of decorator names to check.' },
         },
-        type: "object",
+        type: 'object',
         description: stripIndent`
         An optional object with an optional \`checkDecorators\` property.
         The \`checkDecorators\` property is an array containing the names of the decorators that determine whether or not a class is checked.
       `,
       },
     ],
-    type: "problem",
+    type: 'problem',
   },
-  name: "prefer-composition",
-  create: (context, unused: typeof defaultOptions) => {
+  name: 'prefer-composition',
+  create: (context) => {
     const { couldBeObservable, couldBeSubscription } = getTypeServices(context);
-    const [{ checkDecorators = ["Component"] } = {}] = context.options;
+    const [{ checkDecorators = ['Component'] } = {}] = context.options;
 
-    type Entry = {
+    interface Entry {
       addCallExpressions: es.CallExpression[];
       classDeclaration: es.ClassDeclaration;
       propertyDefinitions: es.PropertyDefinition[];
@@ -59,7 +58,7 @@ const rule = ruleCreator({
       subscribeCallExpressions: es.CallExpression[];
       subscriptions: Set<string>;
       unsubscribeCallExpressions: es.CallExpression[];
-    };
+    }
     const entries: Entry[] = [];
 
     function checkEntry(record: Entry) {
@@ -86,7 +85,7 @@ const rule = ruleCreator({
             return;
           }
           context.report({
-            messageId: "notComposed",
+            messageId: 'notComposed',
             node: property,
           });
         }
@@ -94,7 +93,7 @@ const rule = ruleCreator({
 
       if (!ngOnDestroyDefinition) {
         context.report({
-          messageId: "notImplemented",
+          messageId: 'notImplemented',
           node: classDeclaration.id ?? classDeclaration,
         });
         return;
@@ -102,13 +101,13 @@ const rule = ruleCreator({
 
       subscriptions.forEach((subscription) => {
         const propertyDefinition = propertyDefinitions.find(
-          (propertyDefinition: any) =>
-            propertyDefinition.key.name === subscription
+          (propertyDefinition) =>
+            'name' in propertyDefinition.key && propertyDefinition.key.name === subscription,
         );
         if (!propertyDefinition) {
           context.report({
             data: { name: subscription },
-            messageId: "notDeclared",
+            messageId: 'notDeclared',
             node: classDeclaration.id ?? classDeclaration,
           });
           return;
@@ -118,12 +117,12 @@ const rule = ruleCreator({
           (callExpression) => {
             const name = getMethodCalleeName(callExpression);
             return name === subscription;
-          }
+          },
         );
         if (!callExpression) {
           context.report({
             data: { name: subscription },
-            messageId: "notUnsubscribed",
+            messageId: 'notUnsubscribed',
             node: propertyDefinition.key,
           });
           return;
@@ -159,10 +158,9 @@ const rule = ruleCreator({
     }
 
     function hasDecorator(node: es.ClassDeclaration) {
-      const { decorators } = node as any;
+      const { decorators } = node;
       return (
-        decorators &&
-        decorators.some((decorator: any) => {
+        decorators?.some((decorator) => {
           const { expression } = decorator;
           if (!isCallExpression(expression)) {
             return false;
@@ -181,13 +179,13 @@ const rule = ruleCreator({
       // subscription or if it's assigned to a variable that is added to a
       // subscription.
       const { addCallExpressions, subscriptions } = entry;
-      const parent = getParent(callExpression);
+      const parent = callExpression.parent;
       if (!parent) {
         return false;
       }
       if (isCallExpression(parent)) {
         const addCallExpression = addCallExpressions.find(
-          (callExpression) => callExpression === parent
+          (callExpression) => callExpression === parent,
         );
         if (!addCallExpression) {
           return false;
@@ -207,9 +205,9 @@ const rule = ruleCreator({
         return isVariableComposed(parent.id, entry);
       }
       if (
-        isAssignmentExpression(parent) &&
-        isIdentifier(parent.left) &&
-        parent.operator === "="
+        isAssignmentExpression(parent)
+        && isIdentifier(parent.left)
+        && parent.operator === '='
       ) {
         return isVariableComposed(parent.left, entry);
       }
@@ -222,7 +220,7 @@ const rule = ruleCreator({
       const { name } = identifier;
       const { addCallExpressions, subscriptions } = entry;
       const addCallExpression = addCallExpressions.find(
-        (callExpression) => getMethodCalleeName(callExpression) === name
+        (callExpression) => getMethodCalleeName(callExpression) === name,
       );
       if (!addCallExpression) {
         return false;
@@ -236,23 +234,23 @@ const rule = ruleCreator({
     }
 
     return {
-      "CallExpression[callee.property.name='add']": (
-        node: es.CallExpression
+      'CallExpression[callee.property.name=\'add\']': (
+        node: es.CallExpression,
       ) => {
         const entry = getEntry();
-        if (entry && entry.hasDecorator) {
+        if (entry?.hasDecorator) {
           entry.addCallExpressions.push(node);
         }
       },
-      "CallExpression[callee.property.name='subscribe']": (
-        node: es.CallExpression
+      'CallExpression[callee.property.name=\'subscribe\']': (
+        node: es.CallExpression,
       ) => {
         const entry = getEntry();
-        if (entry && entry.hasDecorator) {
+        if (entry?.hasDecorator) {
           entry.subscribeCallExpressions.push(node);
         }
       },
-      ClassDeclaration: (node: es.ClassDeclaration) => {
+      'ClassDeclaration': (node: es.ClassDeclaration) => {
         entries.push({
           addCallExpressions: [],
           classDeclaration: node,
@@ -263,35 +261,33 @@ const rule = ruleCreator({
           unsubscribeCallExpressions: [],
         });
       },
-      "ClassDeclaration:exit": (node: es.ClassDeclaration) => {
+      'ClassDeclaration:exit': (_node: es.ClassDeclaration) => {
         const entry = entries.pop();
-        if (entry && entry.hasDecorator) {
+        if (entry?.hasDecorator) {
           checkEntry(entry);
         }
       },
-      PropertyDefinition: (node: es.PropertyDefinition) => {
+      'PropertyDefinition': (node: es.PropertyDefinition) => {
         const entry = getEntry();
-        if (entry && entry.hasDecorator) {
+        if (entry?.hasDecorator) {
           entry.propertyDefinitions.push(node);
         }
       },
-      "MethodDefinition[key.name='ngOnDestroy'][kind='method']": (
-        node: es.MethodDefinition
+      'MethodDefinition[key.name=\'ngOnDestroy\'][kind=\'method\']': (
+        node: es.MethodDefinition,
       ) => {
         const entry = getEntry();
-        if (entry && entry.hasDecorator) {
+        if (entry?.hasDecorator) {
           entry.ngOnDestroyDefinition = node;
         }
       },
-      "MethodDefinition[key.name='ngOnDestroy'][kind='method'] CallExpression[callee.property.name='unsubscribe']":
+      'MethodDefinition[key.name=\'ngOnDestroy\'][kind=\'method\'] CallExpression[callee.property.name=\'unsubscribe\']':
         (node: es.CallExpression) => {
           const entry = getEntry();
-          if (entry && entry.hasDecorator) {
+          if (entry?.hasDecorator) {
             entry.unsubscribeCallExpressions.push(node);
           }
         },
     };
   },
 });
-
-export = rule;

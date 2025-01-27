@@ -1,9 +1,9 @@
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../src/rules/prefer-async-pipe");
-import { ruleTester } from "../utils";
+import { stripIndent } from 'common-tags';
+import { preferAsyncPipeRule } from '../../src/rules/prefer-async-pipe';
+import { fromFixture } from '../etc';
+import { ruleTester } from '../rule-tester';
 
-ruleTester({ types: true }).run("prefer-async-pipe", rule, {
+ruleTester({ types: true }).run('prefer-async-pipe', preferAsyncPipeRule, {
   valid: [
     stripIndent`
       // async pipe
@@ -33,7 +33,7 @@ ruleTester({ types: true }).run("prefer-async-pipe", rule, {
                       ~~~~~~~~~ [forbidden]
           }
         }
-      `
+      `,
     ),
   ],
 });

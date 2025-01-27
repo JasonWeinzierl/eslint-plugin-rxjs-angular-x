@@ -36,7 +36,11 @@ We recommend you use the VS Code plugins for ESLint.
 
 ### Testing
 
+Use `yarn test` to run the tests in watch mode.
+We use [vitest](https://vitest.dev) for unit testing.
+
 All unit tests must pass for a pull request to be accepted.
+We also enforce code coverage, which you can check with `yarn coverage --coverage.reporter text`.
 
 ## Pull Request
 

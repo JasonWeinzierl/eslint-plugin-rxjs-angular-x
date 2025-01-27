@@ -1,9 +1,9 @@
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../src/rules/prefer-takeuntil");
-import { ruleTester } from "../utils";
+import { stripIndent } from 'common-tags';
+import { preferTakeuntilRule } from '../../src/rules/prefer-takeuntil';
+import { fromFixture } from '../etc';
+import { ruleTester } from '../rule-tester';
 
-ruleTester({ types: true }).run("prefer-takeuntil", rule, {
+ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
   valid: [
     {
       code: stripIndent`
@@ -219,7 +219,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
           }
         }
       `,
-      options: [{ alias: ["someAlias"] }],
+      options: [{ alias: ['someAlias'] }],
     },
     {
       code: stripIndent`
@@ -298,7 +298,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
       `,
       options: [
         {
-          checkDecorators: ["Component", "Pipe", "Injectable", "Directive"],
+          checkDecorators: ['Component', 'Pipe', 'Injectable', 'Directive'],
         },
       ],
     },
@@ -331,7 +331,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
       `,
       options: [
         {
-          alias: ["someAlias"],
+          alias: ['someAlias'],
           checkDestroy: false,
         },
       ],
@@ -359,7 +359,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
       `,
       options: [
         {
-          alias: ["take"],
+          alias: ['take'],
           checkDestroy: false,
         },
       ],
@@ -391,7 +391,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
           }
         }
       `,
-      { options: [{ checkComplete: true }] }
+      { options: [{ checkComplete: true }] },
     ),
     fromFixture(
       stripIndent`
@@ -420,7 +420,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
           }
         }
       `,
-      { options: [{ checkComplete: true }] }
+      { options: [{ checkComplete: true }] },
     ),
     fromFixture(
       stripIndent`
@@ -448,7 +448,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
           }
         }
       `,
-      { options: [{ checkComplete: true }] }
+      { options: [{ checkComplete: true }] },
     ),
     fromFixture(
       stripIndent`
@@ -474,7 +474,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
           }
         }
       `,
-      { options: [{ checkComplete: true }] }
+      { options: [{ checkComplete: true }] },
     ),
     fromFixture(
       stripIndent`
@@ -502,7 +502,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
           }
         }
       `,
-      { options: [{ checkComplete: true }] }
+      { options: [{ checkComplete: true }] },
     ),
     fromFixture(
       stripIndent`
@@ -530,7 +530,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
           }
         }
       `,
-      { options: [{ checkComplete: true }] }
+      { options: [{ checkComplete: true }] },
     ),
     fromFixture(
       stripIndent`
@@ -554,7 +554,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
           }
         }
       `,
-      { options: [{ checkComplete: true }] }
+      { options: [{ checkComplete: true }] },
     ),
     fromFixture(
       stripIndent`
@@ -583,7 +583,7 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
           }
         }
       `,
-      { options: [{ alias: ["someAlias"] }] }
+      { options: [{ alias: ['someAlias'] }] },
     ),
     fromFixture(
       stripIndent`
@@ -647,10 +647,10 @@ ruleTester({ types: true }).run("prefer-takeuntil", rule, {
       {
         options: [
           {
-            checkDecorators: ["Component", "Pipe", "Injectable", "Directive"],
+            checkDecorators: ['Component', 'Pipe', 'Injectable', 'Directive'],
           },
         ],
-      }
+      },
     ),
   ],
 });

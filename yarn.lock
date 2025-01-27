@@ -1137,7 +1137,6 @@ __metadata:
     common-tags: "npm:^1.8.0"
     eslint: "npm:^8.0.0"
     eslint-etc: "npm:^5.0.0"
-    husky: "npm:^8.0.0"
     lint-staged: "npm:^13.0.0"
     mocha: "npm:^9.0.0"
     prettier: "npm:^2.0.0"
@@ -1729,15 +1728,6 @@ __metadata:
   version: 3.0.1
   resolution: "human-signals@npm:3.0.1"
   checksum: 10c0/0bb27e72aea1666322f69ab9816e05df952ef2160346f2293f98f45d472edb1b62d0f1a596697b50d48d8f8222e6db3b9f9dc0b6bf6113866121001f0a8e48e9
-  languageName: node
-  linkType: hard
-
-"husky@npm:^8.0.0":
-  version: 8.0.1
-  resolution: "husky@npm:8.0.1"
-  bin:
-    husky: lib/bin.js
-  checksum: 10c0/58c0e87c37f0aaea4e0ea02499444df11adb9ec182fd42735385045b51a55cbdcca48afeea337801e50435fbeb0e77c57c2b430695663774afb279bb0e8aa25f
   languageName: node
   linkType: hard
 

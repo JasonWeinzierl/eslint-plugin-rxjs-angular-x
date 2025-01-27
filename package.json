@@ -1,7 +1,44 @@
 {
-  "author": "Nicholas Jamieson <nicholas@cartant.com>",
+  "name": "eslint-plugin-rxjs-angular-x",
+  "type": "commonjs",
+  "version": "0.0.0",
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "description": "ESLint v9+ rules for RxJS and Angular",
+  "author": "Jason Weinzierl <weinzierljason@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x.git"
+  },
   "bugs": {
-    "url": "https://github.com/cartant/eslint-plugin-rxjs-angular/issues"
+    "url": "https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/issues"
+  },
+  "keywords": [
+    "lint",
+    "rules",
+    "eslint",
+    "rxjs",
+    "angular"
+  ],
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "docs"
+  ],
+  "scripts": {
+    "dist": "yarn run lint && yarn run dist:build",
+    "dist:build": "yarn run dist:clean && tsc -p tsconfig-dist.json",
+    "dist:clean": "rimraf dist",
+    "lint": "eslint source/**/*.ts tests/**/*.ts",
+    "prepare": "husky install",
+    "prepublishOnly": "yarn run test && yarn run dist",
+    "prettier": "prettier --write \"./{src,tests}/**/*.{js,json,ts,tsx}\"",
+    "prettier:ci": "prettier --check \"./{src,tests}/**/*.{js,json,ts,tsx}\"",
+    "test": "yarn run test:rules",
+    "test:debug": "mocha -r ts-node/register -t 5000 tests/rules/prefer-async-pipe.ts",
+    "test:rules": "mocha -r ts-node/register -t 5000 tests/rules/*.ts"
   },
   "dependencies": {
     "@typescript-eslint/experimental-utils": "^5.0.0",
@@ -10,7 +47,10 @@
     "requireindex": "~1.2.0",
     "tslib": "^2.0.0"
   },
-  "description": "ESLint rules for RxJS and Angular",
+  "peerDependencies": {
+    "eslint": "^8.0.0",
+    "typescript": "^4.0.0 || ^5.0.0"
+  },
   "devDependencies": {
     "@cartant/eslint-config": "^3.0.0",
     "@types/chai": "^4.2.0",
@@ -29,49 +69,7 @@
     "ts-node": "^10.0.0",
     "typescript": "~4.7.4"
   },
-  "files": [
-    "dist",
-    "docs"
-  ],
-  "homepage": "https://github.com/cartant/eslint-plugin-rxjs-angular",
-  "keywords": [
-    "lint",
-    "rules",
-    "eslint",
-    "rxjs",
-    "angular"
-  ],
-  "license": "MIT",
-  "lint-staged": {
-    "*.{js,ts}": "prettier --write"
-  },
-  "main": "./dist/index.js",
-  "name": "eslint-plugin-rxjs-angular",
-  "optionalDependencies": {},
-  "peerDependencies": {
-    "eslint": "^8.0.0",
-    "typescript": "^4.0.0 || ^5.0.0"
-  },
-  "private": false,
-  "publishConfig": {
-    "tag": "latest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cartant/eslint-plugin-rxjs-angular.git"
-  },
-  "scripts": {
-    "dist": "yarn run lint && yarn run dist:build",
-    "dist:build": "yarn run dist:clean && tsc -p tsconfig-dist.json",
-    "dist:clean": "rimraf dist",
-    "lint": "eslint source/**/*.ts tests/**/*.ts",
-    "prepare": "husky install",
-    "prepublishOnly": "yarn run test && yarn run dist",
-    "prettier": "prettier --write \"./{src,tests}/**/*.{js,json,ts,tsx}\"",
-    "prettier:ci": "prettier --check \"./{src,tests}/**/*.{js,json,ts,tsx}\"",
-    "test": "yarn run test:rules",
-    "test:debug": "mocha -r ts-node/register -t 5000 tests/rules/prefer-async-pipe.ts",
-    "test:rules": "mocha -r ts-node/register -t 5000 tests/rules/*.ts"
-  },
-  "version": "2.0.0"
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }

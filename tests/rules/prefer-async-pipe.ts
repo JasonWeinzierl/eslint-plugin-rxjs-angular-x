@@ -1,6 +1,6 @@
 import { stripIndent } from "common-tags";
 import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/prefer-async-pipe");
+import rule = require("../../src/rules/prefer-async-pipe");
 import { ruleTester } from "../utils";
 
 ruleTester({ types: true }).run("prefer-async-pipe", rule, {

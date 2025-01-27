@@ -37,8 +37,8 @@
     "prettier": "prettier --write \"./{src,tests}/**/*.{js,json,ts,tsx}\"",
     "prettier:ci": "prettier --check \"./{src,tests}/**/*.{js,json,ts,tsx}\"",
     "test": "yarn run test:rules",
-    "test:debug": "mocha -r ts-node/register -t 5000 tests/rules/prefer-async-pipe.ts",
-    "test:rules": "mocha -r ts-node/register -t 5000 tests/rules/*.ts"
+    "test:debug": "mocha -r ts-node/register -t 5000 tests/rules/prefer-async-pipe.test.ts",
+    "test:rules": "mocha -r ts-node/register -t 5000 tests/rules/*.test.ts"
   },
   "dependencies": {
     "@typescript-eslint/experimental-utils": "^5.0.0",

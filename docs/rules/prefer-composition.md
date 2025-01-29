@@ -1,4 +1,8 @@
-# Use subscription composition (`prefer-composition`)
+# Disallow `subscribe` calls that are not composed within Angular components (and, optionally, within services, directives, and pipes) (`rxjs-angular-x/prefer-composition`)
+
+💭 This rule requires [type information](https://typescript-eslint.io/linting/typed-linting).
+
+<!-- end auto-generated rule header -->
 
 This rule effects failures if `subscribe` calls are made with a component and the returned subscription is not composed into a subscription that is unsubscribed when the component is destroyed.
 
@@ -47,6 +51,14 @@ export class SomeComponent implements OnInit, OnDestroy {
 ```
 
 ## Options
+
+<!-- begin auto-generated rule options list -->
+
+| Name              | Description                                    | Type     |
+| :---------------- | :--------------------------------------------- | :------- |
+| `checkDecorators` | An optional array of decorator names to check. | String[] |
+
+<!-- end auto-generated rule options list -->
 
 This rule accepts a single option which is an object with a `checkDecorators` property which is an array containing the names of the decorators that determine whether or not a class is checked. By default, `checkDecorators` is `["Component"]`.
 

@@ -12,6 +12,9 @@ There is no recommended configuration for this package, as all of the rules are 
 This project is a fork of [`eslint-plugin-rxjs-angular`](https://github.com/cartant/eslint-plugin-rxjs-angular)
 initially started to support the new ESLint flat config format.
 
+- The old `.eslintrc` format is not supported.
+  - If you need to continue using this old format, use the original `eslint-plugin-rxjs` or a different fork.
+
 A complete description of all changes are documented in the [CHANGELOG](CHANGELOG.md) file.
 
 ## Install
@@ -51,8 +54,14 @@ See [Linting with Type Information](https://typescript-eslint.io/getting-started
 
 The package includes the following rules:
 
-| Rule | Description | Recommended |
-| --- | --- | --- |
-| [`prefer-async-pipe`](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/blob/main/docs/rules/prefer-async-pipe.md) | Forbids the calling of `subscribe` within Angular components. | No |
-| [`prefer-composition`](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/blob/main/docs/rules/prefer-composition.md) | Forbids `subscribe` calls that are not composed within Angular components (and, optionally, within services, directives, and pipes). | No |
-| [`prefer-takeuntil`](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/blob/main/docs/rules/prefer-takeuntil.md) | Forbids Calling `subscribe` without an accompanying `takeUntil`. | No |
+<!-- begin auto-generated rules list -->
+
+💭 Requires [type information](https://typescript-eslint.io/linting/typed-linting).
+
+| Name                                                   | Description                                                                                                                                         | 💭 |
+| :----------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :- |
+| [prefer-async-pipe](docs/rules/prefer-async-pipe.md)   | Disallow the calling of `subscribe` within Angular components.                                                                                      | 💭 |
+| [prefer-composition](docs/rules/prefer-composition.md) | Disallow `subscribe` calls that are not composed within Angular components (and, optionally, within services, directives, and pipes).               | 💭 |
+| [prefer-takeuntil](docs/rules/prefer-takeuntil.md)     | Disallow `subscribe` calls without an accompanying `takeUntil` within Angular components (and, optionally, within services, directives, and pipes). | 💭 |
+
+<!-- end auto-generated rules list -->

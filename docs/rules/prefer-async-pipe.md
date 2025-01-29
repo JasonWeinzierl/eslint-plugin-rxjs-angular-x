@@ -1,10 +1,10 @@
-# Use container components and async pipe (`prefer-async-pipe`)
+# Disallow the calling of `subscribe` within Angular components (`rxjs-angular-x/prefer-async-pipe`)
+
+💭 This rule requires [type information](https://typescript-eslint.io/linting/typed-linting).
+
+<!-- end auto-generated rule header -->
 
 This rule effects failures if explicit calls to `subscribe` are made within a component. Instead, use a child component to which a value is passed by using the async pipe in the parent component's template.
-
-## Options
-
-This rule has no options.
 
 ## Further reading
 

@@ -1,4 +1,8 @@
-# Use `takeUntil` and  `ngOnDestroy` (`prefer-takeuntil`)
+# Disallow `subscribe` calls without an accompanying `takeUntil` within Angular components (and, optionally, within services, directives, and pipes) (`rxjs-angular-x/prefer-takeuntil`)
+
+💭 This rule requires [type information](https://typescript-eslint.io/linting/typed-linting).
+
+<!-- end auto-generated rule header -->
 
 This rule effects failures if `subscribe` is called within a component and the `takeUntil`-destroyed pattern is not used.
 
@@ -49,6 +53,17 @@ class SomeComponent implements OnDestroy, OnInit {
 ```
 
 ## Options
+
+<!-- begin auto-generated rule options list -->
+
+| Name              | Description                                                     | Type     |
+| :---------------- | :-------------------------------------------------------------- | :------- |
+| `alias`           | An optional array of operator names that alias for `takeUntil`. | String[] |
+| `checkComplete`   | Check for `complete` calls.                                     | Boolean  |
+| `checkDecorators` | An optional array of decorator names to check.                  | String[] |
+| `checkDestroy`    | Check for `Subject`-based `ngOnDestroy`.                        | Boolean  |
+
+<!-- end auto-generated rule options list -->
 
 This rule accepts a single option which is an object with `checkComplete`, `checkDecorators`, `checkDestroy` and `alias` properties.
 

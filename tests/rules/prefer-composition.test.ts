@@ -127,7 +127,7 @@ ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
       `,
       options: [
         {
-          superClass: ["BaseComponent"],
+          superClass: ['BaseComponent'],
         },
       ],
     },

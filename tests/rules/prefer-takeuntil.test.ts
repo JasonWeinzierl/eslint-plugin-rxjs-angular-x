@@ -399,7 +399,7 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       `,
       options: [
         {
-          superClass: ["BaseComponent"],
+          superClass: ['BaseComponent'],
           checkComplete: true,
         },
       ],
@@ -443,7 +443,7 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       `,
       options: [
         {
-          superClass: ["BaseComponent"],
+          superClass: ['BaseComponent'],
           checkComplete: true,
         },
       ],
@@ -776,11 +776,11 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       {
         options: [
           {
-            superClass: ["BaseComponent"],
+            superClass: ['BaseComponent'],
             checkComplete: true,
           },
         ],
-      }
+      },
     ),
     fromFixture(
       stripIndent`
@@ -814,11 +814,11 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       {
         options: [
           {
-            superClass: ["BaseComponent"],
+            superClass: ['BaseComponent'],
             checkComplete: true,
           },
         ],
-      }
+      },
     ),
   ],
 });

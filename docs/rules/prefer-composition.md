@@ -54,9 +54,10 @@ export class SomeComponent implements OnInit, OnDestroy {
 
 <!-- begin auto-generated rule options list -->
 
-| Name              | Description                                    | Type     |
-| :---------------- | :--------------------------------------------- | :------- |
-| `checkDecorators` | An optional array of decorator names to check. | String[] |
+| Name              | Description                                                                                  | Type     |
+| :---------------- | :------------------------------------------------------------------------------------------- | :------- |
+| `checkDecorators` | An optional array of decorator names to check.                                               | String[] |
+| `superClass`      | An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy` | String[] |
 
 <!-- end auto-generated rule options list -->
 
@@ -64,7 +65,7 @@ This rule accepts a single option which is an object with a `checkDecorators` an
 
 The `checkDecorators` property is an array containing the names of the decorators that determine whether or not a class is checked. By default, `checkDecorators` is `["Component"]`.
 
-The `superClass` property is an array containing the names of classes to extend from that already implements a `Subject`-based `ngOnDestroy`.
+The `superClass` property is an array containing the names of classes to extend from that already implement a `Subject`-based `ngOnDestroy`.
 
 ```json
 {

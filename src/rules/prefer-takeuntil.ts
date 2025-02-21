@@ -21,8 +21,8 @@ const messages = {
 } as const;
 type MessageIds = keyof typeof messages;
 
-const ngOnDestroyMethodSelector =
-  "MethodDefinition[key.name='ngOnDestroy'][kind='method']";
+const ngOnDestroyMethodSelector
+  = 'MethodDefinition[key.name=\'ngOnDestroy\'][kind=\'method\']';
 
 const defaultOptions: readonly {
   alias?: string[];
@@ -50,7 +50,7 @@ export const preferTakeuntilRule = ruleCreator({
           checkComplete: { type: 'boolean', description: 'Check for `complete` calls.' },
           checkDecorators: { type: 'array', items: { type: 'string' }, description: 'An optional array of decorator names to check.' },
           checkDestroy: { type: 'boolean', description: 'Check for `Subject`-based `ngOnDestroy`.' },
-          superClass: { type: "array", items: { type: "string" } },
+          superClass: { type: 'array', items: { type: 'string' }, description: 'An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy`' },
         },
         type: 'object',
         description: stripIndent`
@@ -59,7 +59,7 @@ export const preferTakeuntilRule = ruleCreator({
         The \`checkComplete\` property is a boolean that determines whether or not \`complete\` must be called after \`next\`.
         The \`checkDecorators\` property is an array containing the names of the decorators that determine whether or not a class is checked.
         The \`checkDestroy\` property is a boolean that determines whether or not a \`Subject\`-based \`ngOnDestroy\` must be implemented.
-        The \`superClass\` property is an array containing the names of classes to extend from that already implements a \`Subject\`-based \`ngOnDestroy\`.
+        The \`superClass\` property is an array containing the names of classes to extend from that already implement a \`Subject\`-based \`ngOnDestroy\`.
       `,
       },
     ],
@@ -166,8 +166,8 @@ export const preferTakeuntilRule = ruleCreator({
         if (extendsSuperClassDeclaration) {
           if (!superNgOnDestroyCallExpression) {
             check.descriptors.push({
-              data: { method: "ngOnDestroy", name: "super" },
-              messageId: "notCalled",
+              data: { method: 'ngOnDestroy', name: 'super' },
+              messageId: 'notCalled',
               node: ngOnDestroyDefinition.key,
             });
           }
@@ -175,24 +175,24 @@ export const preferTakeuntilRule = ruleCreator({
           if (!checkSubjectProperty(name, entry)) {
             check.descriptors.push({
               data: { name },
-              messageId: "notDeclared",
+              messageId: 'notDeclared',
               node: classDeclaration.id ?? classDeclaration,
             });
           }
           if (!checkSubjectCall(name, nextCallExpressions)) {
             check.descriptors.push({
-              data: { method: "next", name },
-              messageId: "notCalled",
+              data: { method: 'next', name },
+              messageId: 'notCalled',
               node: ngOnDestroyDefinition.key,
             });
           }
           if (
-            checkComplete &&
-            !checkSubjectCall(name, completeCallExpressions)
+            checkComplete
+            && !checkSubjectCall(name, completeCallExpressions)
           ) {
             check.descriptors.push({
-              data: { method: "complete", name },
-              messageId: "notCalled",
+              data: { method: 'complete', name },
+              messageId: 'notCalled',
               node: ngOnDestroyDefinition.key,
             });
           }
@@ -331,15 +331,15 @@ export const preferTakeuntilRule = ruleCreator({
       );
     }
 
-    const extendsSuperClassDeclaration =
-      superClass.length === 0
+    const extendsSuperClassDeclaration
+      = superClass.length === 0
         ? {}
         : {
             [`ClassDeclaration:matches(${superClass
               .map((className) => `[superClass.name="${className}"]`)
               .join()})`]: (node: es.ClassDeclaration) => {
               const entry = getEntry();
-              if (entry && entry.hasDecorator) {
+              if (entry.hasDecorator) {
                 entry.extendsSuperClassDeclaration = node;
               }
             },
@@ -391,7 +391,7 @@ export const preferTakeuntilRule = ruleCreator({
       [`${ngOnDestroyMethodSelector} CallExpression[callee.object.type='Super'][callee.property.name='ngOnDestroy']`]:
         (node: es.CallExpression) => {
           const entry = getEntry();
-          if (entry && entry.hasDecorator) {
+          if (entry.hasDecorator) {
             entry.superNgOnDestroyCallExpression = node;
           }
         },

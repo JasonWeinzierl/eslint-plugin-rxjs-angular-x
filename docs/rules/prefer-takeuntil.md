@@ -56,12 +56,13 @@ class SomeComponent implements OnDestroy, OnInit {
 
 <!-- begin auto-generated rule options list -->
 
-| Name              | Description                                                     | Type     |
-| :---------------- | :-------------------------------------------------------------- | :------- |
-| `alias`           | An optional array of operator names that alias for `takeUntil`. | String[] |
-| `checkComplete`   | Check for `complete` calls.                                     | Boolean  |
-| `checkDecorators` | An optional array of decorator names to check.                  | String[] |
-| `checkDestroy`    | Check for `Subject`-based `ngOnDestroy`.                        | Boolean  |
+| Name              | Description                                                                                  | Type     |
+| :---------------- | :------------------------------------------------------------------------------------------- | :------- |
+| `alias`           | An optional array of operator names that alias for `takeUntil`.                              | String[] |
+| `checkComplete`   | Check for `complete` calls.                                                                  | Boolean  |
+| `checkDecorators` | An optional array of decorator names to check.                                               | String[] |
+| `checkDestroy`    | Check for `Subject`-based `ngOnDestroy`.                                                     | Boolean  |
+| `superClass`      | An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy` | String[] |
 
 <!-- end auto-generated rule options list -->
 
@@ -73,7 +74,7 @@ The `checkDecorators` property is an array containing the names of the decorator
 
 The `checkDestroy` property is a boolean that determines whether or not a `Subject`-based `ngOnDestroy` must be implemented.
 
-The `superClass` property is an array containing the names of classes to extend from that already implements a `Subject`-based `ngOnDestroy`.
+The `superClass` property is an array containing the names of classes to extend from that already implement a `Subject`-based `ngOnDestroy`.
 
 The `alias` property is an array of names of operators that should be treated similarly to `takeUntil`.
 

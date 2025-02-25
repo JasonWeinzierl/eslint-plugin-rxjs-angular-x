@@ -2,6 +2,12 @@
 
 [npm history](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x?activeTab=versions)
 
+## v0.0.2 (2025-02-24)
+
+### Features
+
+- `prefer-composition` and `prefer-takeuntil`: add `superClass` option. ([#3](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x)) ([6dd8003](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/6dd8003d6d5c10ed70adf9806484e7b26bc9dee9))
+
 ## v0.0.1 (2025-01-27)
 
 Initial prerelease version.

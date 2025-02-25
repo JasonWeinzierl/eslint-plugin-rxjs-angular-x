@@ -65,3 +65,31 @@ The package includes the following rules:
 | [prefer-takeuntil](docs/rules/prefer-takeuntil.md)     | Disallow `subscribe` calls without an accompanying `takeUntil` within Angular components (and, optionally, within services, directives, and pipes). | 💭 |
 
 <!-- end auto-generated rules list -->
+
+## Examples
+
+```mjs
+// eslint.json.mjs
+
+import rxjsAngularX from "eslint-plugin-rxjs-angular-x";
+
+export default [
+  {
+    files: ["**/*.ts"],
+    plugins: {
+      "rxjs-angular-x": rxjsAngularX,
+    },
+    rules: {
+      "rxjs-angular-x/prefer-takeuntil": [
+        "error",
+        {
+          checkComplete: false,
+          checkDecorators: ["Component", "Directive", "Injectable"],
+          alias: ["takeUntilDestroyed"],
+          checkDestroy: false,
+        },
+      ],
+    },
+  }
+]
+```

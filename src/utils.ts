@@ -1,4 +1,5 @@
 import { ESLintUtils, TSESLint } from '@typescript-eslint/utils';
+import { version } from '../package.json';
 
 export interface RxjsAngularXRuleDocs {
   description: string;
@@ -6,7 +7,9 @@ export interface RxjsAngularXRuleDocs {
   requiresTypeChecking?: boolean;
 }
 
+const REPO_URL = 'https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x';
+
 export const ruleCreator = ESLintUtils.RuleCreator<RxjsAngularXRuleDocs>(
   (name) =>
-    `https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/tree/main/docs/rules/${name}.md`,
+    `${REPO_URL}/blob/v${version}/docs/rules/${name}.md`,
 );

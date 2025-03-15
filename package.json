@@ -56,7 +56,6 @@
   "dependencies": {
     "@typescript-eslint/utils": "^8.19.1",
     "common-tags": "^1.8.0",
-    "markdownlint-cli2": "^0.17.2",
     "ts-api-utils": "^2.0.0",
     "tslib": "^2.1.0"
   },
@@ -86,6 +85,7 @@
     "eslint-plugin-eslint-plugin": "^6.4.0",
     "eslint-plugin-import-x": "^4.7.0",
     "eslint-plugin-n": "^17.16.2",
+    "markdownlint-cli2": "^0.17.2",
     "rxjs": "^7.8.1",
     "tsup": "^8.4.0",
     "typescript": "~5.8.2",

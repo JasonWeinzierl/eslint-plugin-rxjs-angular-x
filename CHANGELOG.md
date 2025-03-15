@@ -2,6 +2,16 @@
 
 [npm history](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x?activeTab=versions)
 
+## v0.0.3 (2025-03-15)
+
+### Features
+
+- The URL for each rule now aligns with the installed version of this plugin, instead of latest main. ([11c7a09](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/11c7a09c574a7423ce54f6952177609aa835e8a3))
+
+### Fixes
+
+- Remove accidental dependency on markdownlint-cli2. ([cabd9da](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/cabd9dac8b21b54a1bfe519ae6a84ac3028088b0))
+
 ## v0.0.2 (2025-02-24)
 
 ### Features

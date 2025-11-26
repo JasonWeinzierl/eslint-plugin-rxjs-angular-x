@@ -9,7 +9,11 @@
   "homepage": "https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x.git"
+    "url": "git+https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x.git"
+  },
+  "publishConfig": {
+    "provenance": true,
+    "registry": "https://registry.npmjs.org"
   },
   "bugs": {
     "url": "https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/issues"

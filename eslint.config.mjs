@@ -1,18 +1,15 @@
 // @ts-check
 import js from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
+import vitest from '@vitest/eslint-plugin';
 import gitignore from 'eslint-config-flat-gitignore';
+import eslintPlugin from 'eslint-plugin-eslint-plugin';
 import importX from 'eslint-plugin-import-x';
 import n from 'eslint-plugin-n';
+import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
-import vitest from '@vitest/eslint-plugin';
-import eslintPlugin from 'eslint-plugin-eslint-plugin';
 
-/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Config} */
-// @ts-expect-error -- eslint-plugin does not provide types.
-const eslintPluginConfig = eslintPlugin.configs['flat/recommended'];
-
-export default tseslint.config(gitignore(), {
+export default defineConfig(gitignore(), {
   files: [
     'src/**/*.ts',
     'tests/**/*.ts',
@@ -33,7 +30,7 @@ export default tseslint.config(gitignore(), {
     n.configs['flat/recommended-module'],
     importX.flatConfigs.recommended,
     importX.flatConfigs.typescript,
-    eslintPluginConfig,
+    eslintPlugin.configs.recommended,
   ],
   languageOptions: {
     parserOptions: {
@@ -74,6 +71,10 @@ export default tseslint.config(gitignore(), {
     ],
     'eslint-plugin/prefer-placeholders': 'error',
     'eslint-plugin/require-meta-schema-description': 'error',
+    // TODO: fixing these may require bumping the minimum ESLint version.
+    'eslint-plugin/require-meta-default-options': 'off',
+    'eslint-plugin/no-meta-schema-default': 'off',
+    'eslint-plugin/no-meta-replaced-by': 'off',
 
     '@typescript-eslint/no-unnecessary-condition': 'off',
     '@typescript-eslint/restrict-template-expressions': [

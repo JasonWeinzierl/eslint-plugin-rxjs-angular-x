@@ -2,6 +2,13 @@
 
 [npm history](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x?activeTab=versions)
 
+## v0.1.0 (2025-11-26)
+
+### Fixes
+
+- Add compatibility with eslint's `defineConfig()` ([#16](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/pull/16)) ([e0ac67e](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/e0ac67e781f348cba406c38a725496dfeb9d5b14))
+- README has been updated with a more detailed migration guide, and another config example.
+
 ## v0.0.3 (2025-03-15)
 
 ### Features

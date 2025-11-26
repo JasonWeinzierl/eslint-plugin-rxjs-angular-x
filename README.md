@@ -71,6 +71,42 @@ export default defineConfig({
 });
 ```
 
+### Examples
+
+The following is another example, with options:
+
+```js
+// @ts-check
+import { defineConfig } from 'eslint/config';
+import tseslint from 'typescript-eslint';
+import rxjsAngularX from 'eslint-plugin-rxjs-angular-x';
+
+export default defineConfig({
+    extends: [
+        ...tseslint.configs.recommended,
+    ],
+    languageOptions: {
+        parserOptions: {
+            projectService: true,
+        },
+    },
+    plugins: {
+        'rxjs-angular-x': rxjsAngularX,
+    },
+    rules: {
+        'rxjs-angular-x/prefer-takeuntil': [
+            'error',
+            {
+                checkComplete: true,
+                checkDecorators: ["Component", "Directive", "Injectable"],
+                alias: ["takeUntilDestroyed"],
+                checkDestroy: false,
+            },
+        ],
+    },
+});
+```
+
 ## Rules
 
 The package includes the following rules:

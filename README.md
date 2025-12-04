@@ -18,7 +18,7 @@ initially started to support the new ESLint flat config format.
 2. Install `eslint-plugin-rxjs-angular-x`, and import it into your config.
 
     ```diff
-    + import rxjsAngularX from 'eslint-plugin-rxjs-angular-x;
+    + import rxjsAngularX from 'eslint-plugin-rxjs-angular-x';
     ```
 
 3. Add the plugin to your `plugins` block with the new namespace:

@@ -21,4 +21,12 @@ describe('package', () => {
       expect(plugin.rules).toHaveProperty(ruleName);
     }
   });
+
+  it('has metadata', () => {
+    expect(plugin.meta).toBeDefined();
+
+    expect(plugin.meta.name).toBe('eslint-plugin-rxjs-angular-x');
+    expect(plugin.meta.version).toBeDefined();
+    expect(plugin.meta.namespace).toBe('rxjs-angular-x');
+  });
 });

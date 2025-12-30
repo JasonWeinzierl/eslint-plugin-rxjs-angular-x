@@ -12,6 +12,9 @@
     "lib": [
       "ESNext",
     ],
+    "types": [
+      "vitest/globals",
+    ],
 
     /* Output */
     "noEmit": true,

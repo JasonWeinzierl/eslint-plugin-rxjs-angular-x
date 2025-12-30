@@ -2,6 +2,12 @@
 
 [npm history](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x?activeTab=versions)
 
+## v0.1.1 (2025-12-30)
+
+### Features
+
+- Support `plugin.meta.namespace` ([#20](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/pull/20)) ([510d75d](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/510d75d1a515ac81f9cc7e3809bc617540d139cb))
+
 ## v0.1.0 (2025-11-26)
 
 ### Fixes

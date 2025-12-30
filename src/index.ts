@@ -12,7 +12,11 @@ const allRules = {
 } satisfies TSESLint.FlatConfig.Plugin['rules'];
 
 const rxjsAngularX = {
-  meta: { name, version },
+  meta: {
+    name,
+    version,
+    namespace: 'rxjs-angular-x',
+  },
   /** Compatibility with `defineConfig` until https://github.com/typescript-eslint/typescript-eslint/issues/11543 is addressed. */
   rules: allRules as { [K in keyof typeof allRules]: (typeof allRules)[K] & Rule.RuleModule },
 } satisfies ESLint.Plugin;

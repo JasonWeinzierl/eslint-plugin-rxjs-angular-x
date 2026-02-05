@@ -105,4 +105,8 @@ export default defineConfig(gitignore(), {
   extends: [
     vitest.configs.recommended,
   ],
+}, {
+  ignores: [
+    '.yarn/**',
+  ],
 });

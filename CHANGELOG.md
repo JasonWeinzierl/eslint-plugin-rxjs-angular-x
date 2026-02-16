@@ -2,6 +2,16 @@
 
 [npm history](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x?activeTab=versions)
 
+## v0.1.2 (2026-02-16)
+
+### Chores
+
+- Upper bound on peer dependencies ([42b2e85](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/42b2e8528f514e20c128dbc2ab8504de33300a9d))
+  - `rxjs` ^7.2.0 (previously was >=7.2.0)
+  - `typescript` >=4.8.4 <6.0.0 (previously was >=4.8.4)
+- Add names to rule tests ([#29](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/pull/29)) ([ef2dbaa](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/ef2dbaa79fca8b100c27603f385edb01876cadc7))
+- Add OpenSSF Scorecard ([f4887ab](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/f4887ab91cc5954f4261ab9640c9aade1d67672d))
+
 ## v0.1.1 (2025-12-30)
 
 ### Features

@@ -78,10 +78,6 @@ export default defineConfig(gitignore(), {
         require: 'always',
       },
     ],
-    // TODO: fixing these may require bumping the minimum ESLint version.
-    'eslint-plugin/require-meta-default-options': 'off',
-    'eslint-plugin/no-meta-schema-default': 'off',
-    'eslint-plugin/no-meta-replaced-by': 'off',
 
     '@typescript-eslint/no-unnecessary-condition': 'off',
     '@typescript-eslint/restrict-template-expressions': [

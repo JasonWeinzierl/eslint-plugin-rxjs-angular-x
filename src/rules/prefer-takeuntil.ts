@@ -24,16 +24,15 @@ type MessageIds = keyof typeof messages;
 const ngOnDestroyMethodSelector
   = 'MethodDefinition[key.name=\'ngOnDestroy\'][kind=\'method\']';
 
-const defaultOptions: readonly {
+type Options = [{
   alias?: string[];
   checkComplete?: boolean;
   checkDecorators?: string[];
   checkDestroy?: boolean;
   superClass?: string[];
-}[] = [];
+}];
 
 export const preferTakeuntilRule = ruleCreator({
-  defaultOptions,
   meta: {
     docs: {
       description:
@@ -64,6 +63,13 @@ export const preferTakeuntilRule = ruleCreator({
       },
     ],
     type: 'problem',
+    defaultOptions: [{
+      alias: [],
+      checkComplete: false,
+      checkDecorators: ['Component'],
+      checkDestroy: true,
+      superClass: [],
+    }] as Options,
   },
   name: 'prefer-takeuntil',
   create: (context) => {
@@ -73,14 +79,13 @@ export const preferTakeuntilRule = ruleCreator({
     // it's explicitly configured. It's extremely unlikely a subject-based
     // destroy mechanism will be used in conjunction with an alias.
 
-    const [config = {}] = context.options;
-    const {
+    const [{
       alias = [],
-      checkComplete = false,
-      checkDecorators = ['Component'],
-      checkDestroy = alias.length === 0,
+      checkComplete,
+      checkDecorators = [],
+      checkDestroy,
       superClass = [],
-    } = config;
+    }] = context.options;
 
     interface Entry {
       classDeclaration: es.ClassDeclaration;

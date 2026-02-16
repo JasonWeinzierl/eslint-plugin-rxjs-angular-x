@@ -10,13 +10,12 @@ import {
 } from '../etc';
 import { ruleCreator } from '../utils';
 
-const defaultOptions: readonly {
+type Options = [{
   checkDecorators?: string[];
   superClass?: string[];
-}[] = [];
+}];
 
 export const preferCompositionRule = ruleCreator({
-  defaultOptions,
   meta: {
     docs: {
       description:
@@ -46,11 +45,15 @@ export const preferCompositionRule = ruleCreator({
       },
     ],
     type: 'problem',
+    defaultOptions: [{
+      checkDecorators: ['Component'],
+      superClass: [],
+    }] as Options,
   },
   name: 'prefer-composition',
   create: (context) => {
     const { couldBeObservable, couldBeSubscription } = getTypeServices(context);
-    const [{ checkDecorators = ['Component'], superClass = [] } = {}] = context.options;
+    const [{ checkDecorators = [], superClass = [] }] = context.options;
 
     interface Entry {
       addCallExpressions: es.CallExpression[];

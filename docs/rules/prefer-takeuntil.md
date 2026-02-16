@@ -56,13 +56,13 @@ class SomeComponent implements OnDestroy, OnInit {
 
 <!-- begin auto-generated rule options list -->
 
-| Name              | Description                                                                                  | Type     |
-| :---------------- | :------------------------------------------------------------------------------------------- | :------- |
-| `alias`           | An optional array of operator names that alias for `takeUntil`.                              | String[] |
-| `checkComplete`   | Check for `complete` calls.                                                                  | Boolean  |
-| `checkDecorators` | An optional array of decorator names to check.                                               | String[] |
-| `checkDestroy`    | Check for `Subject`-based `ngOnDestroy`.                                                     | Boolean  |
-| `superClass`      | An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy` | String[] |
+| Name              | Description                                                                                  | Type     | Default       |
+| :---------------- | :------------------------------------------------------------------------------------------- | :------- | :------------ |
+| `alias`           | An optional array of operator names that alias for `takeUntil`.                              | String[] | `[]`          |
+| `checkComplete`   | Check for `complete` calls.                                                                  | Boolean  | `false`       |
+| `checkDecorators` | An optional array of decorator names to check.                                               | String[] | [`Component`] |
+| `checkDestroy`    | Check for `Subject`-based `ngOnDestroy`.                                                     | Boolean  | `true`        |
+| `superClass`      | An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy` | String[] | `[]`          |
 
 <!-- end auto-generated rule options list -->
 

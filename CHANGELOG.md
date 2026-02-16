@@ -2,6 +2,49 @@
 
 [npm history](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x?activeTab=versions)
 
+## v1.0.0 (2026-02-16)
+
+### Breaking Changes
+
+- ESLint v10 is required ([#30](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/pull/30)) ([2698833](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/2698833ad3ffeac7cc63478ba6469c9040845bc6))
+- Node.js ^20.19.0 || ^22.13.0 || >=24 is required; Node.js v18 is no longer supported
+- ESM is required; CommonJS is no longer supported
+
+### Chores
+
+- `@typescript-eslint/utils` ^8.56.0 is required
+- `ts-api-utils` ^2.4.0 is required
+- `common-tags` is no longer required
+- `docs` folder is no longer published to npm
+
+### Summarized Changes from `eslint-plugin-rxjs-angular`
+
+Since this is the first non-v0 release, the following re-states relevant pre-release changes after forking `eslint-plugin-rxjs-angular`:
+
+#### Breaking Changes
+
+- The namespace for this forked plugin is `rxjs-angular-x`
+- TypeScript >=4.8.4 <6.0.0 is required
+- `tslib` ^2.1.0 is required
+
+#### Features
+
+- `prefer-composition` and `prefer-takeuntil`: add `superClass` option. ([#3](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x)) ([6dd8003](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/6dd8003d6d5c10ed70adf9806484e7b26bc9dee9))
+- Support `plugin.meta.namespace` ([#20](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/pull/20)) ([510d75d](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/510d75d1a515ac81f9cc7e3809bc617540d139cb))
+
+#### Chores
+
+- The following dependencies are no longer required:
+  - `eslint-etc`
+  - `requireindex`
+  - `tsutils`
+  - `tsutils-etc`
+- Add `requiresTypeChecking` to `meta.docs` of relevant rules
+- The URL for each rule now aligns with the installed version of this plugin, instead of latest main. ([11c7a09](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/11c7a09c574a7423ce54f6952177609aa835e8a3))
+- Add names to rule tests ([#29](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/pull/29)) ([ef2dbaa](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/ef2dbaa79fca8b100c27603f385edb01876cadc7))
+
+---
+
 ## v0.1.2 (2026-02-16)
 
 ### Chores

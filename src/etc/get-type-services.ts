@@ -6,19 +6,16 @@ export function getTypeServices<
   TOptions extends readonly unknown[],
 >(context: TSESLint.RuleContext<TMessageIds, Readonly<TOptions>>) {
   const services = ESLintUtils.getParserServices(context);
-  const { program, getTypeAtLocation } = services;
-  const typeChecker = program.getTypeChecker();
+  const { getTypeAtLocation } = services;
 
   const couldBeType = (
     node: TSESTree.Node,
     name: string | RegExp,
-    qualified?: { name: RegExp },
   ): boolean => {
     const type = getTypeAtLocation(node);
     return tsutilsEtcCouldBeType(
       type,
       name,
-      qualified ? { ...qualified, typeChecker } : undefined,
     );
   };
 

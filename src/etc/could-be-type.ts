@@ -4,29 +4,25 @@ import ts from 'typescript';
 export function couldBeType(
   type: ts.Type,
   name: string | RegExp,
-  qualified?: {
-    name: RegExp;
-    typeChecker: ts.TypeChecker;
-  },
 ): boolean {
   if (tsutils.isTypeReference(type)) {
     type = type.target;
   }
 
-  if (isType(type, name, qualified)) {
+  if (isType(type, name)) {
     return true;
   }
 
   if (tsutils.isUnionOrIntersectionType(type)) {
-    return type.types.some(t => couldBeType(t, name, qualified));
+    return type.types.some(t => couldBeType(t, name));
   }
 
   const baseTypes = type.getBaseTypes();
-  if (baseTypes?.some(t => couldBeType(t, name, qualified))) {
+  if (baseTypes?.some(t => couldBeType(t, name))) {
     return true;
   }
 
-  if (couldImplement(type, name, qualified)) {
+  if (couldImplement(type, name)) {
     return true;
   }
 
@@ -36,20 +32,8 @@ export function couldBeType(
 function isType(
   type: ts.Type,
   name: string | RegExp,
-  qualified?: {
-    name: RegExp;
-    typeChecker: ts.TypeChecker;
-  },
 ): boolean {
   if (!type.symbol) {
-    return false;
-  }
-  if (
-    qualified
-    && !qualified.name.test(
-      qualified.typeChecker.getFullyQualifiedName(type.symbol),
-    )
-  ) {
     return false;
   }
   return typeof name === 'string'
@@ -60,10 +44,6 @@ function isType(
 function couldImplement(
   type: ts.Type,
   name: string | RegExp,
-  qualified?: {
-    name: RegExp;
-    typeChecker: ts.TypeChecker;
-  },
 ): boolean {
   const { symbol } = type;
   if (symbol) {
@@ -74,7 +54,7 @@ function couldImplement(
         const implemented = heritageClauses.some(
           ({ token, types }) =>
             token === ts.SyntaxKind.ImplementsKeyword
-            && types.some(node => isMatchingNode(node, name, qualified)),
+            && types.some(node => isMatchingNode(node, name)),
         );
         if (implemented) {
           return true;
@@ -88,23 +68,8 @@ function couldImplement(
 function isMatchingNode(
   node: ts.ExpressionWithTypeArguments,
   name: string | RegExp,
-  qualified?: {
-    name: RegExp;
-    typeChecker: ts.TypeChecker;
-  },
 ): boolean {
   const { expression } = node;
-  if (qualified) {
-    const type = qualified.typeChecker.getTypeAtLocation(expression);
-    if (type) {
-      const qualifiedName = qualified.typeChecker.getFullyQualifiedName(
-        type.symbol,
-      );
-      if (!qualified.name.test(qualifiedName)) {
-        return false;
-      }
-    }
-  }
   const text = expression.getText();
   return typeof name === 'string' ? text === name : Boolean(text.match(name));
 }

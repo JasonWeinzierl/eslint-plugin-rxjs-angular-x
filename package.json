@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-rxjs-angular-x",
-  "type": "commonjs",
+  "type": "module",
   "version": "0.1.2",
   "packageManager": "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8",
   "description": "ESLint v9+ rules for RxJS and Angular",
@@ -28,25 +28,18 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      }
-    }
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist",
-    "docs"
+    "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "lint": "yarn lint-js && yarn lint-docs && yarn lint-eslint-docs",
     "lint-js": "eslint",
     "lint-docs": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
@@ -58,13 +51,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@typescript-eslint/utils": "^8.19.1",
-    "common-tags": "^1.8.0",
-    "ts-api-utils": "^2.0.0",
+    "@typescript-eslint/utils": "^8.56.0",
+    "ts-api-utils": "^2.4.0",
     "tslib": "^2.1.0"
   },
   "peerDependencies": {
-    "eslint": "^8.57.0 || ^9.0.0",
+    "eslint": "^10.0.0",
     "rxjs": "^7.2.0",
     "typescript": ">=4.8.4 <6.0.0"
   },
@@ -74,31 +66,34 @@
     }
   },
   "devDependencies": {
-    "@eslint/config-helpers": "0.4.1",
-    "@eslint/js": "^9.38.0",
-    "@stylistic/eslint-plugin": "^5.5.0",
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.8.0",
     "@types/common-tags": "^1.8.4",
-    "@types/node": "~18.18.0",
-    "@typescript-eslint/rule-tester": "^8.51.0",
-    "@vitest/coverage-v8": "^3.2.4",
-    "@vitest/eslint-plugin": "^1.4.0",
-    "bumpp": "^10.3.1",
-    "eslint": "^9.38.0",
+    "@types/node": "~20.19.33",
+    "@typescript-eslint/rule-tester": "^8.56.0",
+    "@vitest/coverage-v8": "^4.0.18",
+    "@vitest/eslint-plugin": "^1.6.9",
+    "bumpp": "^10.4.1",
+    "common-tags": "^1.8.2",
+    "eslint": "^10.0.0",
     "eslint-config-flat-gitignore": "^2.1.0",
-    "eslint-doc-generator": "~2.2.2",
+    "eslint-doc-generator": "~3.1.0",
     "eslint-import-resolver-typescript": "^4.4.4",
-    "eslint-plugin-eslint-plugin": "^7.2.0",
+    "eslint-plugin-eslint-plugin": "^7.3.1",
     "eslint-plugin-import-x": "^4.16.1",
-    "eslint-plugin-n": "^17.23.1",
-    "markdownlint-cli2": "~0.19.0",
+    "eslint-plugin-n": "^17.24.0",
+    "markdownlint-cli2": "~0.21.0",
     "rxjs": "^7.8.2",
-    "tsup": "^8.5.0",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.51.0",
-    "vite": "^6.3.5",
-    "vitest": "^3.2.4"
+    "tsdown": "~0.20.3",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.56.0",
+    "vite": "npm:rolldown-vite@~7.3.1",
+    "vitest": "^4.0.18"
+  },
+  "resolutions": {
+    "vite": "npm:rolldown-vite@~7.3.1"
   },
   "engines": {
-    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+    "node": "^20.19.0 || ^22.13.0 || >=24"
   }
 }

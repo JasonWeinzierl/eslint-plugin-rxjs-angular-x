@@ -14,8 +14,8 @@ export const ruleCreator = ESLintUtils.RuleCreator<RxjsAngularXRuleDocs<unknown[
     `${REPO_URL}/blob/v${version}/docs/rules/${name}.md`,
   // Ensure the resulting types are narrowed to exactly what each rule declares.
 ) as <
-  Options extends readonly unknown[],
   MessageIds extends string,
   Desc extends string,
   Docs extends RxjsAngularXRuleDocs<Options, Desc>,
+  Options extends readonly unknown[] = [],
 >({ meta, name, ...rule }: Readonly<ESLintUtils.RuleWithMetaAndName<Options, MessageIds, Docs>>) => TSESLint.RuleModule<MessageIds, Options, Docs>;

@@ -2,7 +2,6 @@ import {
   TSESTree as es,
   TSESLint,
 } from '@typescript-eslint/utils';
-import { stripIndent } from 'common-tags';
 import {
   getTypeServices,
   isCallExpression,
@@ -24,16 +23,15 @@ type MessageIds = keyof typeof messages;
 const ngOnDestroyMethodSelector
   = 'MethodDefinition[key.name=\'ngOnDestroy\'][kind=\'method\']';
 
-const defaultOptions: readonly {
+type Options = [{
   alias?: string[];
   checkComplete?: boolean;
   checkDecorators?: string[];
   checkDestroy?: boolean;
   superClass?: string[];
-}[] = [];
+}];
 
 export const preferTakeuntilRule = ruleCreator({
-  defaultOptions,
   meta: {
     docs: {
       description:
@@ -53,17 +51,22 @@ export const preferTakeuntilRule = ruleCreator({
           superClass: { type: 'array', items: { type: 'string' }, description: 'An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy`' },
         },
         type: 'object',
-        description: stripIndent`
-        An optional object with optional \`alias\`, \`checkComplete\`, \`checkDecorators\` and \`checkDestroy\` properties.
-        The \`alias\` property is an array containing the names of operators that aliases for \`takeUntil\`.
-        The \`checkComplete\` property is a boolean that determines whether or not \`complete\` must be called after \`next\`.
-        The \`checkDecorators\` property is an array containing the names of the decorators that determine whether or not a class is checked.
-        The \`checkDestroy\` property is a boolean that determines whether or not a \`Subject\`-based \`ngOnDestroy\` must be implemented.
-        The \`superClass\` property is an array containing the names of classes to extend from that already implement a \`Subject\`-based \`ngOnDestroy\`.
-      `,
+        description: `An optional object with optional \`alias\`, \`checkComplete\`, \`checkDecorators\` and \`checkDestroy\` properties.
+The \`alias\` property is an array containing the names of operators that aliases for \`takeUntil\`.
+The \`checkComplete\` property is a boolean that determines whether or not \`complete\` must be called after \`next\`.
+The \`checkDecorators\` property is an array containing the names of the decorators that determine whether or not a class is checked.
+The \`checkDestroy\` property is a boolean that determines whether or not a \`Subject\`-based \`ngOnDestroy\` must be implemented.
+The \`superClass\` property is an array containing the names of classes to extend from that already implement a \`Subject\`-based \`ngOnDestroy\`.`,
       },
     ],
     type: 'problem',
+    defaultOptions: [{
+      alias: [],
+      checkComplete: false,
+      checkDecorators: ['Component'],
+      checkDestroy: true,
+      superClass: [],
+    }] as Options,
   },
   name: 'prefer-takeuntil',
   create: (context) => {
@@ -73,14 +76,13 @@ export const preferTakeuntilRule = ruleCreator({
     // it's explicitly configured. It's extremely unlikely a subject-based
     // destroy mechanism will be used in conjunction with an alias.
 
-    const [config = {}] = context.options;
-    const {
+    const [{
       alias = [],
-      checkComplete = false,
-      checkDecorators = ['Component'],
-      checkDestroy = alias.length === 0,
+      checkComplete,
+      checkDecorators = [],
+      checkDestroy,
       superClass = [],
-    } = config;
+    }] = context.options;
 
     interface Entry {
       classDeclaration: es.ClassDeclaration;

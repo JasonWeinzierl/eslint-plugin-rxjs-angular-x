@@ -54,10 +54,10 @@ export class SomeComponent implements OnInit, OnDestroy {
 
 <!-- begin auto-generated rule options list -->
 
-| Name              | Description                                                                                  | Type     |
-| :---------------- | :------------------------------------------------------------------------------------------- | :------- |
-| `checkDecorators` | An optional array of decorator names to check.                                               | String[] |
-| `superClass`      | An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy` | String[] |
+| Name              | Description                                                                                  | Type     | Default       |
+| :---------------- | :------------------------------------------------------------------------------------------- | :------- | :------------ |
+| `checkDecorators` | An optional array of decorator names to check.                                               | String[] | [`Component`] |
+| `superClass`      | An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy` | String[] | `[]`          |
 
 <!-- end auto-generated rule options list -->
 

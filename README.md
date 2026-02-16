@@ -4,6 +4,10 @@
 [![NPM version](https://img.shields.io/npm/v/eslint-plugin-rxjs-angular-x.svg)](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/badge)](https://scorecard.dev/viewer/?uri=github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x)
 
+> [!NOTE]
+> Forked from [`eslint-plugin-rxjs-angular`](https://github.com/cartant/eslint-plugin-rxjs-angular)
+> as the original repository seems [no longer maintained](https://github.com/cartant/eslint-plugin-rxjs-angular/issues/23).
+
 This ESLint plugin is intended to prevent issues with combined use of [RxJS 7](https://rxjs.dev) and [Angular](https://angular.dev).
 
 There is no recommended configuration for this package, as all of the rules are opinionated.
@@ -76,37 +80,6 @@ export default defineConfig({
     },
 });
 ```
-
-## Migration Guide from `eslint-plugin-rxjs-angular`
-
-> [!TIP]
-> A complete description of all changes are documented in the [CHANGELOG](CHANGELOG.md) file.
-
-This project started as a fork of [`eslint-plugin-rxjs-angular`](https://github.com/cartant/eslint-plugin-rxjs-angular)
-but is still compatible with the eslintrc configuration format.
-
-> [!WARNING]
-> Users are highly encouraged to upgrade to ESLint's flat configuration format.
-> See: [https://eslint.org/docs/v9.x/use/configure/migration-guide]
-
-1. Install `eslint-plugin-rxjs-angular-x` using your preferred package manager.
-2. Replace the `rxjs-angular` plugin in your `plugins` block:
-
-    ```diff
-    plugins: [
-    -   "rxjs-angular",
-    +   "rxjs-angular-x",
-    ]
-    ```
-
-3. In your `rules` block, replace the namespace `rxjs-angular` with `rxjs-angular-x` for all rules:
-
-    ```diff
-    -   "rxjs-angular/prefer-async-pipe": "error",
-    +   "rxjs-angular-x/prefer-async-pipe": "error",
-    ```
-
-    - Note: if your project has inline comments (e.g. `eslint-disable-next-line`) referencing `rxjs-angular` rules, you must update the namespace there too.
 
 ## Rules
 

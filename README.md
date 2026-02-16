@@ -4,7 +4,7 @@
 [![NPM version](https://img.shields.io/npm/v/eslint-plugin-rxjs-angular-x.svg)](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/badge)](https://scorecard.dev/viewer/?uri=github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x)
 
-This ESLint plugin is intended to prevent issues with combined use of [RxJS](https://rxjs.dev) and [Angular](https://angular.dev).
+This ESLint plugin is intended to prevent issues with combined use of [RxJS 7](https://rxjs.dev) and [Angular](https://angular.dev).
 
 There is no recommended configuration for this package, as all of the rules are opinionated.
 

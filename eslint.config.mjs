@@ -71,6 +71,13 @@ export default defineConfig(gitignore(), {
     ],
     'eslint-plugin/prefer-placeholders': 'error',
     'eslint-plugin/require-meta-schema-description': 'error',
+    'eslint-plugin/test-case-shorthand-strings': ['error', 'never'],
+    'eslint-plugin/require-test-case-name': [
+      'error',
+      {
+        require: 'always',
+      },
+    ],
     // TODO: fixing these may require bumping the minimum ESLint version.
     'eslint-plugin/require-meta-default-options': 'off',
     'eslint-plugin/no-meta-schema-default': 'off',

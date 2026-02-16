@@ -5,22 +5,24 @@ import { ruleTester } from '../rule-tester';
 
 ruleTester({ types: true }).run('prefer-async-pipe', preferAsyncPipeRule, {
   valid: [
-    stripIndent`
-      // async pipe
-      import { of } from "rxjs";
-      @Component({
-        selector: "some-component",
-        template: "<span>{{ something | async }}</span>"
-      })
-      class SomeComponent {
-        something = of("foo");
-      }
-    `,
+    {
+      name: 'async pipe',
+      code: stripIndent`
+        import { of } from "rxjs";
+        @Component({
+          selector: "some-component",
+          template: "<span>{{ something | async }}</span>"
+        })
+        class SomeComponent {
+          something = of("foo");
+        }
+      `,
+    },
   ],
   invalid: [
     fromFixture(
+      'subscribe',
       stripIndent`
-        // subscribe
         import { of } from "rxjs";
         @Component({
           selector: "some-component",

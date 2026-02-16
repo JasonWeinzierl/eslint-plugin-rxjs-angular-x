@@ -6,8 +6,8 @@ import { ruleTester } from '../rule-tester';
 ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
   valid: [
     {
+      name: 'composed component',
       code: stripIndent`
-        // composed component
         import { Component, OnDestroy, OnInit } from "@angular/core";
         import { of, Subscription } from "rxjs";
 
@@ -28,8 +28,8 @@ ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
       `,
     },
     {
+      name: 'variable composed component',
       code: stripIndent`
-        // variable composed component
         import { Component, OnDestroy, OnInit } from "@angular/core";
         import { of, Subscription } from "rxjs";
 
@@ -53,8 +53,8 @@ ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
       `,
     },
     {
+      name: 'destructured composed component',
       code: stripIndent`
-        // destructured composed component
         import { Component, OnDestroy, OnInit } from "@angular/core";
         import { of, Subscription } from "rxjs";
 
@@ -77,8 +77,8 @@ ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
       `,
     },
     {
+      name: 'not a component',
       code: stripIndent`
-        // not a component
         import { of } from "rxjs";
 
         class SomeClass {
@@ -94,8 +94,8 @@ ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
       `,
     },
     {
+      name: 'extends superClass',
       code: stripIndent`
-        // extends superClass
         // https://github.com/cartant/eslint-plugin-rxjs-angular/issues/1
         import { Component, Directive, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
@@ -134,8 +134,8 @@ ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
   ],
   invalid: [
     fromFixture(
+      'not composed component',
       stripIndent`
-        // not composed component
         import { Component, OnDestroy, OnInit } from "@angular/core";
         import { of, Subscription } from "rxjs";
 
@@ -157,8 +157,8 @@ ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
       `,
     ),
     fromFixture(
+      'not unsubscribed component',
       stripIndent`
-        // not unsubscribed component
         import { Component, OnDestroy, OnInit } from "@angular/core";
         import { of, Subscription } from "rxjs";
 
@@ -179,8 +179,8 @@ ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
       `,
     ),
     fromFixture(
+      'not destroyed component',
       stripIndent`
-        // not destroyed component
         import { Component, OnDestroy, OnInit } from "@angular/core";
         import { of, Subscription } from "rxjs";
 
@@ -199,8 +199,8 @@ ruleTester({ types: true }).run('prefer-composition', preferCompositionRule, {
       `,
     ),
     fromFixture(
+      'not declared',
       stripIndent`
-        // not declared
         import { Component, OnDestroy, OnInit } from "@angular/core";
         import { of, Subscription } from "rxjs";
 

@@ -6,8 +6,8 @@ import { ruleTester } from '../rule-tester';
 ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
   valid: [
     {
+      name: 'correct component',
       code: stripIndent`
-        // correct component
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -33,8 +33,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       `,
     },
     {
+      name: 'correct component, not last',
       code: stripIndent`
-        // correct component, not last
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { map, switchMap, takeUntil } from "rxjs/operators";
@@ -61,8 +61,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       `,
     },
     {
+      name: 'destructured component',
       code: stripIndent`
-        // destructured component
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -90,8 +90,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       `,
     },
     {
+      name: 'secondary takeuntil component',
       code: stripIndent`
-        // secondary takeuntil component
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -118,8 +118,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       `,
     },
     {
+      name: 'not components',
       code: stripIndent`
-        // not components
         import { of } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
 
@@ -170,8 +170,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       `,
     },
     {
+      name: 'no destroy only takeUntil',
       code: stripIndent`
-        // no destroy only takeuntil
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -193,6 +193,7 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       options: [{ checkDestroy: false }],
     },
     {
+      name: 'with alias',
       code: stripIndent`
         // with alias
         import { Component, OnDestroy } from "@angular/core";
@@ -222,8 +223,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       options: [{ alias: ['someAlias'] }],
     },
     {
+      name: 'decorators with takeUntil',
       code: stripIndent`
-        // decorators with takeuntil
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -303,8 +304,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       ],
     },
     {
+      name: 'https://github.com/cartant/rxjs-tslint-rules/issues/115',
       code: stripIndent`
-        // https://github.com/cartant/rxjs-tslint-rules/issues/115
         import { Component } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -337,8 +338,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       ],
     },
     {
+      name: 'https://github.com/cartant/eslint-plugin-rxjs-angular/issues/5',
       code: stripIndent`
-        // https://github.com/cartant/eslint-plugin-rxjs-angular/issues/5
         import { Component } from "@angular/core";
         import { of } from "rxjs";
         import { switchMap, take } from "rxjs/operators";
@@ -365,8 +366,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       ],
     },
     {
+      name: 'extends superClass',
       code: stripIndent`
-        // extends superClass
         // https://github.com/cartant/eslint-plugin-rxjs-angular/issues/1
         import { Component, Directive, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
@@ -405,8 +406,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       ],
     },
     {
+      name: 'extends superClass and implements OnDestroy',
       code: stripIndent`
-        // extends superClass and implements OnDestroy
         // https://github.com/cartant/eslint-plugin-rxjs-angular/issues/1
         import { Component, Directive, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
@@ -451,8 +452,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
   ],
   invalid: [
     fromFixture(
+      'no pipe component',
       stripIndent`
-        // no pipe component
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -478,8 +479,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       { options: [{ checkComplete: true }] },
     ),
     fromFixture(
+      'no takeUntil component',
       stripIndent`
-        // no takeuntil component
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -507,8 +508,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       { options: [{ checkComplete: true }] },
     ),
     fromFixture(
+      'no subject component',
       stripIndent`
-        // no subject component
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -535,8 +536,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       { options: [{ checkComplete: true }] },
     ),
     fromFixture(
+      'no destroy component',
       stripIndent`
-        // no destroy component
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -561,8 +562,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       { options: [{ checkComplete: true }] },
     ),
     fromFixture(
+      'no next component',
       stripIndent`
-        // no next component
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -589,8 +590,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       { options: [{ checkComplete: true }] },
     ),
     fromFixture(
+      'no complete component',
       stripIndent`
-        // no complete component
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -617,8 +618,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       { options: [{ checkComplete: true }] },
     ),
     fromFixture(
+      'no destroy and no takeUntil component',
       stripIndent`
-        // no destroy and no takeuntil component
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -641,8 +642,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       { options: [{ checkComplete: true }] },
     ),
     fromFixture(
+      'without alias',
       stripIndent`
-        // without alias
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -670,8 +671,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       { options: [{ alias: ['someAlias'] }] },
     ),
     fromFixture(
+      'decorators without takeUntil',
       stripIndent`
-        // decorators without takeuntil
         import { Component, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -737,8 +738,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       },
     ),
     fromFixture(
+      'extends superClass and implements OnDestroy, missing super.ngOnDestroy()',
       stripIndent`
-        // extends superClass and implements OnDestroy, missing super.ngOnDestroy()
         // https://github.com/cartant/eslint-plugin-rxjs-angular/issues/1
         import { Component, Directive, OnDestroy } from "@angular/core";
         import { of, Subject } from "rxjs";
@@ -783,8 +784,8 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       },
     ),
     fromFixture(
+      'Calls super.ngOnDestroy() w/o extending base class',
       stripIndent`
-        // Calls super.ngOnDestroy() w/o extending base class
         // https://github.com/cartant/eslint-plugin-rxjs-angular/issues/1
         import { Component, OnDestroy } from "@angular/core";
         import { of } from "rxjs";

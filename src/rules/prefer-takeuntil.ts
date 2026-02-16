@@ -2,7 +2,6 @@ import {
   TSESTree as es,
   TSESLint,
 } from '@typescript-eslint/utils';
-import { stripIndent } from 'common-tags';
 import {
   getTypeServices,
   isCallExpression,
@@ -52,14 +51,12 @@ export const preferTakeuntilRule = ruleCreator({
           superClass: { type: 'array', items: { type: 'string' }, description: 'An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy`' },
         },
         type: 'object',
-        description: stripIndent`
-        An optional object with optional \`alias\`, \`checkComplete\`, \`checkDecorators\` and \`checkDestroy\` properties.
-        The \`alias\` property is an array containing the names of operators that aliases for \`takeUntil\`.
-        The \`checkComplete\` property is a boolean that determines whether or not \`complete\` must be called after \`next\`.
-        The \`checkDecorators\` property is an array containing the names of the decorators that determine whether or not a class is checked.
-        The \`checkDestroy\` property is a boolean that determines whether or not a \`Subject\`-based \`ngOnDestroy\` must be implemented.
-        The \`superClass\` property is an array containing the names of classes to extend from that already implement a \`Subject\`-based \`ngOnDestroy\`.
-      `,
+        description: `An optional object with optional \`alias\`, \`checkComplete\`, \`checkDecorators\` and \`checkDestroy\` properties.
+The \`alias\` property is an array containing the names of operators that aliases for \`takeUntil\`.
+The \`checkComplete\` property is a boolean that determines whether or not \`complete\` must be called after \`next\`.
+The \`checkDecorators\` property is an array containing the names of the decorators that determine whether or not a class is checked.
+The \`checkDestroy\` property is a boolean that determines whether or not a \`Subject\`-based \`ngOnDestroy\` must be implemented.
+The \`superClass\` property is an array containing the names of classes to extend from that already implement a \`Subject\`-based \`ngOnDestroy\`.`,
       },
     ],
     type: 'problem',

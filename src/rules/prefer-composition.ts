@@ -1,5 +1,4 @@
 import { TSESTree as es } from '@typescript-eslint/utils';
-import { stripIndent } from 'common-tags';
 import {
   getTypeServices,
   isAssignmentExpression,
@@ -37,11 +36,9 @@ export const preferCompositionRule = ruleCreator({
           superClass: { type: 'array', items: { type: 'string' }, description: 'An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy`' },
         },
         type: 'object',
-        description: stripIndent`
-        An optional object with an optional \`checkDecorators\` property.
-        The \`checkDecorators\` property is an array containing the names of the decorators that determine whether or not a class is checked.
-        The \`superClass\` property is an array containing the names of classes to extend from that already implement a \`Subject\`-based \`ngOnDestroy\`.
-      `,
+        description: `An optional object with an optional \`checkDecorators\` property.
+The \`checkDecorators\` property is an array containing the names of the decorators that determine whether or not a class is checked.
+The \`superClass\` property is an array containing the names of classes to extend from that already implement a \`Subject\`-based \`ngOnDestroy\`.`,
       },
     ],
     type: 'problem',

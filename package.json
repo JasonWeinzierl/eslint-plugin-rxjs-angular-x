@@ -52,7 +52,6 @@
   },
   "dependencies": {
     "@typescript-eslint/utils": "8.55.1-alpha.4",
-    "common-tags": "^1.8.2",
     "ts-api-utils": "^2.4.0",
     "tslib": "^2.1.0"
   },
@@ -75,6 +74,7 @@
     "@vitest/coverage-v8": "^4.0.18",
     "@vitest/eslint-plugin": "^1.6.9",
     "bumpp": "^10.4.1",
+    "common-tags": "^1.8.2",
     "eslint": "^10.0.0",
     "eslint-config-flat-gitignore": "^2.1.0",
     "eslint-doc-generator": "~3.1.0",

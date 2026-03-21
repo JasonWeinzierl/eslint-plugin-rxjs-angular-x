@@ -7,12 +7,13 @@ on:
     types:
       - completed
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   report:
     runs-on: ubuntu-latest
-
-    permissions:
-      pull-requests: write
 
     steps:
       - uses: actions/checkout@v6

@@ -20,7 +20,7 @@
     "declaration": true,
     "declarationMap": false,
     "sourceMap": false,
-    "importHelpers": true,
+    "importHelpers": false,
 
     /* Rules */
     "skipLibCheck": true,

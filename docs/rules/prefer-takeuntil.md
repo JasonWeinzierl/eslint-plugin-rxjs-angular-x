@@ -6,7 +6,7 @@
 
 This rule effects failures if `subscribe` is called within a component and the `takeUntil`-destroyed pattern is not used.
 
-This rule can check if all subjects passed into `takeUntil` as correctly handled in `ngOnDestroy`.
+This rule can check if all subjects passed into `takeUntil` are correctly handled in `ngOnDestroy`.
 
 ## Rule details
 

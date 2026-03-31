@@ -319,9 +319,9 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
         const observable = of("o");
 
         @Component({
-          selector: "component-with-alias-checkdestroy-false"
+          selector: "component-with-alias-checkdestroy-true"
         })
-        class MyComponent extends OnDestroy {
+        class MyComponent implements OnDestroy {
           private readonly destroy = new Subject<void>();
 
           ngOnInit() {

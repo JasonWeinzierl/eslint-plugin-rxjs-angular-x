@@ -14,7 +14,7 @@ import { ruleCreator } from '../utils';
 const messages = {
   noDestroy: '`ngOnDestroy` is not implemented.',
   noTakeUntil:
-    'Forbids calling `subscribe` without an accompanying `takeUntil`.',
+    'Calling `subscribe` without an accompanying `takeUntil` is forbidden.',
   notCalled: '`{{name}}.{{method}}()` not called.',
   notDeclared: 'Subject `{{name}}` not a class property.',
 } as const;
@@ -47,7 +47,7 @@ export const preferTakeuntilRule = ruleCreator({
           alias: { type: 'array', items: { type: 'string' }, description: 'An optional array of operator names that alias for `takeUntil`.' },
           checkComplete: { type: 'boolean', description: 'Check for `complete` calls.' },
           checkDecorators: { type: 'array', items: { type: 'string' }, description: 'An optional array of decorator names to check.' },
-          checkDestroy: { type: 'boolean', description: 'Check for `Subject`-based `ngOnDestroy`.' },
+          checkDestroy: { type: 'boolean', description: 'Check for `Subject`-based `ngOnDestroy`. Defaults to `true` when `alias` is empty and `false` when `alias` is non-empty.' },
           superClass: { type: 'array', items: { type: 'string' }, description: 'An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy`' },
         },
         type: 'object',
@@ -55,7 +55,7 @@ export const preferTakeuntilRule = ruleCreator({
 The \`alias\` property is an array containing the names of operators that aliases for \`takeUntil\`.
 The \`checkComplete\` property is a boolean that determines whether or not \`complete\` must be called after \`next\`.
 The \`checkDecorators\` property is an array containing the names of the decorators that determine whether or not a class is checked.
-The \`checkDestroy\` property is a boolean that determines whether or not a \`Subject\`-based \`ngOnDestroy\` must be implemented.
+The \`checkDestroy\` property is a boolean that determines whether or not a \`Subject\`-based \`ngOnDestroy\` must be implemented. If not set, it defaults to \`true\` when \`alias\` is empty and \`false\` when \`alias\` is non-empty.
 The \`superClass\` property is an array containing the names of classes to extend from that already implement a \`Subject\`-based \`ngOnDestroy\`.`,
       },
     ],
@@ -64,17 +64,13 @@ The \`superClass\` property is an array containing the names of classes to exten
       alias: [],
       checkComplete: false,
       checkDecorators: ['Component'],
-      checkDestroy: true,
+      checkDestroy: undefined,
       superClass: [],
     }] as Options,
   },
   name: 'prefer-takeuntil',
   create: (context) => {
     const { couldBeObservable } = getTypeServices(context);
-
-    // If an alias is specified, check for the subject-based destroy only if
-    // it's explicitly configured. It's extremely unlikely a subject-based
-    // destroy mechanism will be used in conjunction with an alias.
 
     const [{
       alias = [],
@@ -83,6 +79,11 @@ The \`superClass\` property is an array containing the names of classes to exten
       checkDestroy,
       superClass = [],
     }] = context.options;
+
+    // If an alias is specified, check for the subject-based destroy only if
+    // it's explicitly configured. It's extremely unlikely a subject-based
+    // destroy mechanism will be used in conjunction with an alias.
+    const enforceSubjectDestroyPattern = checkDestroy ?? alias.length === 0;
 
     interface Entry {
       classDeclaration: es.ClassDeclaration;
@@ -112,7 +113,7 @@ The \`superClass\` property is an array containing the names of classes to exten
         checkSubscribe(callExpression, entry);
       });
 
-      if (checkDestroy) {
+      if (enforceSubjectDestroyPattern) {
         checkNgOnDestroy(entry);
       }
     }
@@ -227,7 +228,8 @@ The \`superClass\` property is an array containing the names of classes to exten
       if (!isIdentifier(callee)) {
         return { found: false };
       }
-      if (callee.name === 'takeUntil' || alias.includes(callee.name)) {
+      const isTakeUntil = callee.name === 'takeUntil';
+      if (isTakeUntil || alias.includes(callee.name)) {
         const [arg] = callExpression.arguments;
         if (arg) {
           if (
@@ -240,7 +242,7 @@ The \`superClass\` property is an array containing the names of classes to exten
             return { found: true, name: arg.name };
           }
         }
-        if (!checkDestroy) {
+        if (!isTakeUntil || !enforceSubjectDestroyPattern) {
           return { found: true };
         }
       }

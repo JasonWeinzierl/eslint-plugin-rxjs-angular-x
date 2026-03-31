@@ -28,7 +28,6 @@ export default defineConfig(gitignore(), {
       commaDangle: 'always-multiline',
     }),
     n.configs['flat/recommended-module'],
-    importX.flatConfigs.recommended,
     importX.flatConfigs.typescript,
     eslintPlugin.configs.recommended,
   ],
@@ -58,8 +57,13 @@ export default defineConfig(gitignore(), {
         },
       },
     ],
-
-    'import-x/no-named-as-default-member': 'off',
+    'import-x/no-cycle': 'error',
+    'import-x/no-duplicates': 'warn',
+    'import-x/no-self-import': 'error',
+    'import-x/no-useless-path-segments': 'warn',
+    'import-x/newline-after-import': 'warn',
+    'import-x/no-empty-named-blocks': 'warn',
+    'import-x/consistent-type-specifier-style': 'warn',
 
     'n/no-missing-import': 'off',
 

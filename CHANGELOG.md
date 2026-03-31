@@ -2,6 +2,13 @@
 
 [npm history](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x?activeTab=versions)
 
+## v1.0.1 (2026-03-30)
+
+### Fixes
+
+- Support TypeScript 6 ([#39](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/pull/39)) ([6478ab9](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/6478ab9bdce6e18e52e9a99c84b4ac064ad23d33))
+- **prefer-takeuntil**: allow aliases that don't accept subjects ([#40](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/pull/40)) ([f7fa531](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/f7fa531a1c78e72471ea1f38c47d01e16ce9954a))
+
 ## v1.0.0 (2026-02-16)
 
 ### Breaking Changes

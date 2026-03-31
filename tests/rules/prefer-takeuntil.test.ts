@@ -223,6 +223,121 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
       options: [{ alias: ['someAlias'] }],
     },
     {
+      name: 'with takeUntilDestroyed alias',
+      code: stripIndent`
+        import { Component, DestroyRef, inject } from "@angular/core";
+        import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+        import { of } from "rxjs";
+        import { switchMap } from "rxjs/operators";
+
+        const o = of("o");
+
+        @Component({
+          selector: "component-with-takeuntil-destroyed"
+        })
+        class CorrectComponent {
+          private readonly destroyRef = inject(DestroyRef);
+
+          someMethod() {
+            o.pipe(
+              switchMap(_ => o),
+              takeUntilDestroyed(this.destroyRef)
+            ).subscribe();
+          }
+        }
+      `,
+      options: [{ alias: ['takeUntilDestroyed'] }],
+    },
+    {
+      name: 'with alias accepting this param',
+      code: stripIndent`
+        import { Component } from "@angular/core";
+        import { of } from "rxjs";
+        import { switchMap } from "rxjs/operators";
+
+        declare const UntilDestroy: ClassDecorator;
+        declare function untilDestroyed(instance: unknown): unknown;
+
+        const observable = of("o");
+
+        @UntilDestroy()
+        @Component({
+          selector: "component-with-until-destroyed"
+        })
+        class MyComponent {
+          ngOnInit() {
+            observable.pipe(
+              switchMap(_ => observable),
+              untilDestroyed(this)
+            ).subscribe();
+          }
+        }
+      `,
+      options: [
+        {
+          alias: ['untilDestroyed', 'untilCompleted'],
+          checkDecorators: ['Component', 'Directive', 'Pipe', 'Injectable'],
+        },
+      ],
+    },
+    {
+      name: 'with alias accepting zero params',
+      code: stripIndent`
+        import { Injectable } from "@angular/core";
+        import { of } from "rxjs";
+        import { switchMap } from "rxjs/operators";
+
+        declare function untilCompleted(): unknown;
+
+        const anotherObservable = of("o");
+
+        @Injectable()
+        class MyService {
+          someMethod() {
+            anotherObservable.pipe(
+              switchMap(_ => anotherObservable),
+              untilCompleted()
+            ).subscribe();
+          }
+        }
+      `,
+      options: [
+        {
+          alias: ['untilDestroyed', 'untilCompleted'],
+          checkDecorators: ['Component', 'Directive', 'Pipe', 'Injectable'],
+        },
+      ],
+    },
+    {
+      name: 'with alias and checkDestroy true',
+      code: stripIndent`
+        import { Component, OnDestroy } from "@angular/core";
+        import { of, switchMap, Subject } from "rxjs";
+
+        declare function someAlias(subject: unknown): unknown;
+
+        const observable = of("o");
+
+        @Component({
+          selector: "component-with-alias-checkdestroy-true"
+        })
+        class MyComponent implements OnDestroy {
+          private readonly destroy = new Subject<void>();
+
+          ngOnInit() {
+            observable.pipe(
+              switchMap(_ => observable),
+              someAlias(this.destroy.asObservable())
+            ).subscribe();
+          }
+          ngOnDestroy() {
+            // Alias doesn't enforce subject-based destroy.
+          }
+        }
+      `,
+      options: [{ alias: ['someAlias'], checkDestroy: true }],
+    },
+    {
       name: 'decorators with takeUntil',
       code: stripIndent`
         import { Component, OnDestroy } from "@angular/core";
@@ -669,6 +784,112 @@ ruleTester({ types: true }).run('prefer-takeuntil', preferTakeuntilRule, {
         }
       `,
       { options: [{ alias: ['someAlias'] }] },
+    ),
+    fromFixture(
+      'with alias accepting subject and checkDestroy true',
+      stripIndent`
+        import { Component } from "@angular/core";
+        import { of } from "rxjs";
+        import { switchMap } from "rxjs/operators";
+
+        declare function someAlias(subject: unknown): unknown;
+
+        const observable = of("o");
+
+        @Component({
+          selector: "component-with-alias-checkdestroy-true-no-ondestroy"
+        })
+        class NoDestroyComponent {
+              ~~~~~~~~~~~~~~~~~~ [noDestroy]
+          private readonly destroy = {};
+
+          ngOnInit() {
+            observable.pipe(
+              switchMap(_ => observable),
+              someAlias(this.destroy)
+            ).subscribe();
+          }
+        }
+      `,
+      { options: [{ alias: ['someAlias'], checkDestroy: true }] },
+    ),
+    fromFixture(
+      'with alias accepting this param and checkDestroy true',
+      stripIndent`
+        import { Component } from "@angular/core";
+        import { of } from "rxjs";
+        import { switchMap } from "rxjs/operators";
+
+        declare function untilDestroyed(instance: unknown): unknown;
+
+        const observable = of("o");
+
+        @Component({
+          selector: "component-with-alias-checkdestroy-true-this"
+        })
+        class NoTakeUntilComponent {
+              ~~~~~~~~~~~~~~~~~~~~ [noDestroy]
+          ngOnInit() {
+            observable.pipe(
+              switchMap(_ => observable),
+              untilDestroyed(this)
+            ).subscribe();
+          }
+        }
+      `,
+      { options: [{ alias: ['untilDestroyed'], checkDestroy: true }] },
+    ),
+    fromFixture(
+      'imported alias local name not configured',
+      stripIndent`
+        import { Component } from "@angular/core";
+        import { of } from "rxjs";
+        import { switchMap } from "rxjs/operators";
+
+        declare function ud(instance: unknown): unknown;
+
+        const observable = of("o");
+
+        @Component({
+          selector: "component-with-imported-local-alias"
+        })
+        class NoTakeUntilComponent {
+          ngOnInit() {
+            observable.pipe(
+              switchMap(_ => observable),
+              ud(this)
+            ).subscribe();
+              ~~~~~~~~~ [noTakeUntil]
+          }
+        }
+      `,
+      { options: [{ alias: ['untilDestroyed'] }] },
+    ),
+    fromFixture(
+      'without takeUntilDestroyed alias',
+      stripIndent`
+        import { Component, DestroyRef, inject } from "@angular/core";
+        import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+        import { of } from "rxjs";
+        import { switchMap } from "rxjs/operators";
+
+        const o = of("o");
+
+        @Component({
+          selector: "component-without-takeuntil-destroyed-alias"
+        })
+        class NoTakeUntilComponent {
+          private readonly destroyRef = inject(DestroyRef);
+
+          someMethod() {
+            o.pipe(
+              switchMap(_ => o)
+            ).subscribe();
+              ~~~~~~~~~ [noTakeUntil]
+          }
+        }
+      `,
+      { options: [{ alias: ['takeUntilDestroyed'] }] },
     ),
     fromFixture(
       'decorators without takeUntil',

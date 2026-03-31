@@ -6,6 +6,8 @@
 
 This rule effects failures if `subscribe` is called within a component and the `takeUntil`-destroyed pattern is not used.
 
+This rule can check if all subjects passed into `takeUntil` are correctly handled in `ngOnDestroy`.
+
 ## Rule details
 
 Examples of **incorrect** code for this rule:
@@ -56,13 +58,13 @@ class SomeComponent implements OnDestroy, OnInit {
 
 <!-- begin auto-generated rule options list -->
 
-| Name              | Description                                                                                  | Type     | Default       |
-| :---------------- | :------------------------------------------------------------------------------------------- | :------- | :------------ |
-| `alias`           | An optional array of operator names that alias for `takeUntil`.                              | String[] | `[]`          |
-| `checkComplete`   | Check for `complete` calls.                                                                  | Boolean  | `false`       |
-| `checkDecorators` | An optional array of decorator names to check.                                               | String[] | [`Component`] |
-| `checkDestroy`    | Check for `Subject`-based `ngOnDestroy`.                                                     | Boolean  | `true`        |
-| `superClass`      | An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy` | String[] | `[]`          |
+| Name              | Description                                                                                                              | Type     | Default       |
+| :---------------- | :----------------------------------------------------------------------------------------------------------------------- | :------- | :------------ |
+| `alias`           | An optional array of operator names that alias for `takeUntil`.                                                          | String[] | `[]`          |
+| `checkComplete`   | Check for `complete` calls.                                                                                              | Boolean  | `false`       |
+| `checkDecorators` | An optional array of decorator names to check.                                                                           | String[] | [`Component`] |
+| `checkDestroy`    | Check for `Subject`-based `ngOnDestroy`. Defaults to `true` when `alias` is empty and `false` when `alias` is non-empty. | Boolean  |               |
+| `superClass`      | An optional array of superclass names that already implement a `Subject`-based `ngOnDestroy`                             | String[] | `[]`          |
 
 <!-- end auto-generated rule options list -->
 
@@ -72,7 +74,7 @@ The `checkComplete` property is a boolean that determines whether or not `comple
 
 The `checkDecorators` property is an array containing the names of the decorators that determine whether or not a class is checked. By default, `checkDecorators` is `["Component"]`.
 
-The `checkDestroy` property is a boolean that determines whether or not a `Subject`-based `ngOnDestroy` must be implemented.
+The `checkDestroy` property is a boolean that determines whether or not a `Subject`-based `ngOnDestroy` must be implemented. If not set, it defaults to \`true\` when \`alias\` is empty and \`false\` when \`alias\` is non-empty.
 
 The `superClass` property is an array containing the names of classes to extend from that already implement a `Subject`-based `ngOnDestroy`.
 

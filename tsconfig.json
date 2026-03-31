@@ -4,7 +4,6 @@
     "target": "ES2018",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "esModuleInterop": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
 
@@ -12,13 +11,16 @@
     "lib": [
       "ESNext",
     ],
+    "types": [
+      "node",
+    ],
 
     /* Output */
     "noEmit": true,
     "declaration": true,
     "declarationMap": false,
     "sourceMap": false,
-    "importHelpers": true,
+    "importHelpers": false,
 
     /* Rules */
     "skipLibCheck": true,

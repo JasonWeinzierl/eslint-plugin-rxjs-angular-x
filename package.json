@@ -57,6 +57,11 @@
     "@typescript-eslint/utils": "^8.58.0",
     "ts-api-utils": "^2.5.0"
   },
+  "dependenciesMeta": {
+    "unrs-resolver": {
+      "built": false
+    }
+  },
   "peerDependencies": {
     "eslint": "^10.0.0",
     "rxjs": "^7.2.0",

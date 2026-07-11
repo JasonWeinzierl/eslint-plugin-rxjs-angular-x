@@ -1996,7 +1996,7 @@ __metadata:
     eslint-plugin-eslint-plugin: "npm:^7.3.2"
     eslint-plugin-import-x: "npm:^4.17.1"
     eslint-plugin-n: "npm:^18.2.2"
-    fast-check: "npm:^4.8.0"
+    fast-check: "npm:^4.9.0"
     markdownlint-cli2: "npm:~0.23.0"
     rxjs: "npm:^7.8.2"
     ts-api-utils: "npm:^2.5.0"
@@ -2172,12 +2172,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-check@npm:^3.0.0 || ^4.0.0, fast-check@npm:^4.8.0":
-  version: 4.8.0
-  resolution: "fast-check@npm:4.8.0"
+"fast-check@npm:^3.0.0 || ^4.0.0, fast-check@npm:^4.9.0":
+  version: 4.9.0
+  resolution: "fast-check@npm:4.9.0"
   dependencies:
     pure-rand: "npm:^8.0.0"
-  checksum: 10c0/f72556a29db4ff386a8b6e50d420b06c7e5eaafff7db5560a99136c57d8d4777998155eb02d1bbeff396f575cc0b1442c8a1c4ddb798c4a919b542de1a1904ff
+  checksum: 10c0/d31e6cf7b4ef01dc654193ea7c34a894c51b1553b6781f22a50808d5535d825c2ff2adff23a7c2f14d0452c90917bd20a84c1e807d1f8064aa4d984a21e72788
   languageName: node
   linkType: hard
 

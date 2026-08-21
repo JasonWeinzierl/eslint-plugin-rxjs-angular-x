@@ -45,7 +45,6 @@
     "lint-docs": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
     "lint-eslint-docs": "yarn build && eslint-doc-generator --check",
     "docs": "eslint-doc-generator",
-    "release": "bumpp && echo \"Create a new release in GitHub to trigger the publish workflow.\"",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit"
@@ -80,7 +79,6 @@
     "@typescript-eslint/rule-tester": "^8.63.0",
     "@vitest/coverage-v8": "^4.1.10",
     "@vitest/eslint-plugin": "^1.6.23",
-    "bumpp": "^11.1.0",
     "common-tags": "^1.8.2",
     "eslint": "^10.7.0",
     "eslint-config-flat-gitignore": "^2.3.0",

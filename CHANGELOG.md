@@ -4,6 +4,13 @@
 
 [npm history](https://www.npmjs.com/package/eslint-plugin-rxjs-angular-x?activeTab=versions)
 
+## [1.0.2](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/compare/v1.0.1...v1.0.2) (2026-08-31)
+
+
+### Documentation
+
+* OpenSSF Best Practices badge ([e06d06c](https://github.com/JasonWeinzierl/eslint-plugin-rxjs-angular-x/commit/e06d06c537cede3dac0fa833a984af8afc52f08a))
+
 ## v1.0.1 (2026-03-30)
 
 ### Fixes
